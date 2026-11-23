@@ -1,444 +1,217 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
+<!doctype html>
+<html lang="pt-BR" data-type="place" data-radius="soft" data-buttons="solid">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cariri Sucré — Adoçando Sua Alma! | Faça Sua Encomenda</title>
-  <meta name="description" content="Cariri Sucré — Adoçando Sua Alma! Monte sua caixa de doces tradicionais, gourmet, linha exclusiva, flores em açúcar, personalizados, bem-casados e bolos sob encomenda em Juazeiro do Norte - CE." />
-  <meta name="theme-color" content="#E41B32" />
-  <meta name="referrer" content="strict-origin-when-cross-origin" />
-  <link rel="icon" type="image/png" href="assets/favicon.png" />
-
-  <meta property="og:type" content="website" />
-  <meta property="og:locale" content="pt_BR" />
-  <meta property="og:title" content="Cariri Sucré — Adoçando Sua Alma!" />
-  <meta property="og:description" content="Escolha seus sabores favoritos e faça sua encomenda online." />
-  <meta property="og:image" content="assets/art/hero-collage-art.png" />
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,600&family=JetBrains+Mono:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-
-  <link rel="stylesheet" href="styles.css" />
-
-  <!-- Meta Pixel Oficial (silencioso em background) -->
-  <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '9850103268427591');
-    fbq('track', 'PageView');
-  </script>
-  <noscript>
-    <img height="1" width="1" style="display:none"
-         src="https://www.facebook.com/tr?id=9850103268427591&ev=PageView&noscript=1"
-         alt="" />
-  </noscript>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cariri Sucré · Doces finos e bolos por encomenda em Juazeiro do Norte</title>
+<meta name="description" content="Docinhos tradicionais, gourmet, flores de açúcar, personalizados, bem-casados e bolos feitos à mão em Juazeiro do Norte. Monte seu pedido e envie pelo WhatsApp.">
+<meta name="page-type" content="place">
+<meta name="site-kind" content="other">
+<meta name="page-kind" content="place">
+<meta name="theme-color" content="#B3121F">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Cariri Sucré · Doces finos por encomenda">
+<meta property="og:description" content="Monte sua caixa de doces e envie o pedido pelo WhatsApp.">
+<meta property="og:image" content="https://caririsucre.vercel.app/share.jpg">
+<meta property="og:url" content="https://caririsucre.vercel.app/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://caririsucre.vercel.app/">
+<link rel="icon" href="assets/icon-192.png" type="image/png">
+<link rel="apple-touch-icon" href="assets/icon-192.png">
+<link rel="preload" href="assets/fonts/gloock-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/figtree-latin.woff2" as="font" type="font/woff2" crossorigin>
+<script>document.documentElement.classList.add('mo-js');setTimeout(()=>document.documentElement.classList.add('mo-safe'),2500)</script>
+<link rel="modulepreload" href="assets/moments/moments.js"><link rel="modulepreload" href="assets/moments/lib.js">
+<link rel="stylesheet" href="assets/styles.css">
+<!-- Meta Pixel (mantido do site anterior) -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','9850103268427591');fbq('track','PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=9850103268427591&ev=PageView&noscript=1" alt=""></noscript>
 </head>
 <body>
+<a class="skip" href="#cardapio">Pular para o cardápio</a>
 
-  <!-- 1. CABEÇALHO DIRETO COM A COR DA MARCA -->
-  <header class="site-header">
-    <div class="container site-header__inner">
-      <a href="#topo" class="brand-lockup">
-        <img src="assets/logo-cariri-sucre.png" alt="Cariri Sucré — Adoçando Sua Alma!" class="brand-lockup__logo" width="54" height="54" />
-        <div>
-          <span class="brand-lockup__name">Cariri Sucré</span>
-          <span class="brand-lockup__tag">Adoçando Sua Alma !</span>
-        </div>
-      </a>
+<header class="nav" id="topo">
+  <div class="wrap nav__in">
+    <a class="nav__brand" href="#topo" aria-label="Cariri Sucré, início">
+      <img src="assets/logo.png" width="197" height="195" alt="Cariri Sucré">
+    </a>
+    <nav class="nav__links" aria-label="Seções">
+      <a href="#cardapio">Cardápio</a>
+      <a href="#bolos">Bolos</a>
+      <a href="#atelie">Ateliê</a>
+      <a href="#como-pedir">Como pedir</a>
+    </nav>
+    <button class="bag-btn" type="button" data-open-bag aria-label="Abrir sacola, vazia">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8Z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg>
+      <span>Sacola</span>
+      <b class="bag-btn__count" data-bag-count hidden>0</b>
+    </button>
+  </div>
+</header>
 
-      <nav class="main-nav" aria-label="Categorias do cardápio">
-        <a href="#cardapio" class="main-nav__link js-cat-jump" data-cat="favoritos">Tradicionais</a>
-        <a href="#cardapio" class="main-nav__link js-cat-jump" data-cat="especiais">Gourmet</a>
-        <a href="#cardapio" class="main-nav__link js-cat-jump" data-cat="exclusiva">Linha Exclusiva</a>
-        <a href="#cardapio" class="main-nav__link js-cat-jump" data-cat="arte">Flores em Açúcar</a>
-        <a href="#cardapio" class="main-nav__link js-cat-jump" data-cat="bolos">Bolos</a>
-        <a href="#nossas-criacoes" class="main-nav__link">Galeria</a>
-      </nav>
-
-      <button type="button" class="btn-cart-header js-open-drawer" aria-label="Ver minha caixa de doces">
-        <span>Meu Pedido</span>
-        <span class="btn-cart-header__badge" id="header-cart-badge">0 un · R$ 0,00</span>
-      </button>
-    </div>
-  </header>
-
-  <main id="topo">
-    <!-- 2. HERO COM ARTE DE COLAGEM NO FUNDO & COMPOSIÇÃO EM CAMADAS -->
-    <section class="hero-collage-stage">
-      <div class="container hero__grid">
-        <div>
-          <div class="hero-badge">
-            <span>♥ Doceria Artesanal • Juazeiro do Norte - CE</span>
-          </div>
-
-          <h1 class="hero__title">
-            Doces feitos à mão para <em>adoçar sua alma</em> e encantar sua festa.
-          </h1>
-
-          <p class="hero__lead">
-            Escolha seus sabores favoritos em lotes de 25 unidades, misture tradicionais, gourmet e flores em açúcar, ou encomende seu bolo festivo.
-          </p>
-
-          <div class="hero-quick-rules">
-            <span class="hero-rule-chip">✨ Pedido mínimo: 50 doces (2 sabores de 25)</span>
-            <span class="hero-rule-chip">🍓 Misture categorias livremente</span>
-            <span class="hero-rule-chip">📅 Encomendas com 48h de antecedência</span>
-          </div>
-
-          <div class="hero__ctas">
-            <a href="#cardapio" class="btn-hero-order">
-              <span>Montar Minha Caixa Agora</span>
-              <span aria-hidden="true">↓</span>
-            </a>
-            <button type="button" class="btn-hero-secondary js-open-drawer">
-              <span>Finalizar / Agendar Pedido</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- Arte em Colagem com as Fotos Reais -->
-        <div class="hero-art-wrap">
-          <img src="assets/art/hero-collage-art.png" alt="Colagem artesanal Cariri Sucré — Flores em açúcar, brigadeiros gourmet, bolo em acetato e bem-casados" class="hero-art-img" width="590" height="490" />
-        </div>
-      </div>
-
-      <!-- Divisória Ondulada para o Cardápio -->
-      <div class="hero-wave-divider" aria-hidden="true">
-        <svg viewBox="0 0 1440 54" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-          <path d="M0 24C120 52 240 52 360 24C480 -4 600 -4 720 24C840 52 960 52 1080 24C1200 -4 1320 -4 1440 24V54H0V24Z" fill="#FFF8F0"/>
-        </svg>
-      </div>
-    </section>
-
-    <!-- 3. CARDÁPIO DIRETO DE PEDIDOS -->
-    <section class="section-menu" id="cardapio">
-      <div class="container">
-
-        <!-- Barra Viva da Caixa (Mínimo 50 doces = 2 sabores de 25) -->
-        <div class="box-builder-bar" aria-live="polite">
-          <div class="box-builder-bar__left">
-            <img src="assets/logo-cariri-sucre.png" alt="" class="box-builder-bar__seal" />
-            <div>
-              <div class="box-builder-bar__title">
-                <span>Sua Caixa Cariri Sucré</span>
-                <span class="box-status-pill" id="tracker-status-chip">Escolha 2 sabores (50 doces)</span>
-              </div>
-              <p class="box-builder-bar__sub" id="tracker-status-msg">
-                Toque em +25 doces nos seus sabores preferidos (você pode misturar 25 de uma categoria + 25 de outra).
-              </p>
-            </div>
-          </div>
-
-          <div class="box-slots-strip" id="tracker-slots-container">
-            <span class="slot-pill">1º Sabor (25 doces)</span>
-            <span class="slot-pill">2º Sabor (25 doces)</span>
-          </div>
-        </div>
-
-        <!-- Combos Prontos com 1 Toque -->
-        <div class="quick-combos-strip" aria-label="Combinações prontas com 1 clique">
-          <span class="quick-combos-strip__label">Sugestões rápidas:</span>
-          <button type="button" class="combo-pill-btn js-apply-combo" data-combo="misto50">
-            <span>25 Brigadeiro + 25 Ninho c/ Nutella</span>
-            <strong>R$ 77,50</strong>
-          </button>
-          <button type="button" class="combo-pill-btn js-apply-combo" data-combo="tradicional50">
-            <span>25 Brigadeiro + 25 Beijinho</span>
-            <strong>R$ 70,00</strong>
-          </button>
-          <button type="button" class="combo-pill-btn js-apply-combo" data-combo="festa100">
-            <span>Cento Sortido Festa (4 sabores)</span>
-            <strong>R$ 182,50</strong>
-          </button>
-        </div>
-
-        <!-- Filtros de Categoria & Busca -->
-        <div class="menu-toolbar">
-          <div class="category-tabs" role="tablist">
-            <button type="button" class="cat-tab cat-tab--active js-cat-tab" data-cat="todos">
-              <span>Todos</span>
-            </button>
-            <button type="button" class="cat-tab js-cat-tab" data-cat="favoritos">
-              <span>Os Favoritos de Sempre</span>
-              <span class="cat-tab__price">R$ 1,40</span>
-            </button>
-            <button type="button" class="cat-tab js-cat-tab" data-cat="especiais">
-              <span>Especiais Gourmet</span>
-              <span class="cat-tab__price">R$ 1,60–1,80</span>
-            </button>
-            <button type="button" class="cat-tab js-cat-tab" data-cat="exclusiva">
-              <span>Linha Exclusiva</span>
-              <span class="cat-tab__price">R$ 2,50–3,00</span>
-            </button>
-            <button type="button" class="cat-tab js-cat-tab" data-cat="arte">
-              <span>Arte em Açúcar (Flores)</span>
-              <span class="cat-tab__price">R$ 3,00–4,00</span>
-            </button>
-            <button type="button" class="cat-tab js-cat-tab" data-cat="personalizada">
-              <span>Personalizados</span>
-              <span class="cat-tab__price">R$ 1,80</span>
-            </button>
-            <button type="button" class="cat-tab js-cat-tab" data-cat="comemoracao">
-              <span>Bem-Casados, Trufas &amp; Copinhos</span>
-            </button>
-            <button type="button" class="cat-tab js-cat-tab" data-cat="bolos">
-              <span>Bolos</span>
-            </button>
-          </div>
-
-          <div class="menu-search">
-            <span class="menu-search__icon" aria-hidden="true">⌕</span>
-            <input type="search" id="menu-search-input" class="menu-search__input" placeholder="Buscar sabor, pistache, flor, bolo..." aria-label="Buscar sabor" />
-          </div>
-        </div>
-
-        <!-- Catálogo Renderizado Dinamicamente -->
-        <div id="menu-catalog-root"></div>
-      </div>
-    </section>
-
-    <!-- 4. MURAL ARTÍSTICO DE COLAGENS & VÍDEOS DO ATELIÊ -->
-    <section class="section-collage-wall" id="nossas-criacoes">
-      <div class="container section-collage-wall__inner">
-        <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;">
-          <div>
-            <span class="hero-badge" style="margin-bottom:10px;">♥ Feito à mão em cada detalhe</span>
-            <h2 style="font-family:var(--font-display);font-size:clamp(1.75rem,3vw,2.4rem);color:#fff;">
-              Mural do Nosso Ateliê
-            </h2>
-          </div>
-          <a href="https://www.instagram.com/caririsucre/" target="_blank" rel="noopener noreferrer" class="btn-hero-secondary">
-            <span>Acompanhe no @caririsucre ↗</span>
+<main>
+  <section class="hero" data-enter aria-labelledby="hero-title">
+    <div class="wrap hero__in">
+      <div class="hero__copy">
+        <h1 id="hero-title">Doces finos e bolos por encomenda em Juazeiro do Norte</h1>
+        <p class="hero__lede">Docinhos a partir de R$ 1,40, flores de açúcar esculpidas à mão e bolos para a sua festa. Pedido mínimo de 50 docinhos, com 48 horas de antecedência.</p>
+        <div class="hero__actions">
+          <a class="btn btn--milk btn--lg" href="#cardapio">Montar meu pedido
+            <svg class="arrow" viewBox="0 0 12 12" aria-hidden="true"><path d="M1 6h8"/><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
           </a>
-        </div>
-
-        <div class="scrapbook-grid">
-          <figure class="scrap-frame scrap-frame--wide js-zoom-image" data-full-src="assets/photos/foto-16.jpg" data-title="Flores em Açúcar, Ninho com Nutella e Brigadeiros Gourmet">
-            <img src="assets/photos/foto-16.jpg" alt="Caixa de doces e flores em açúcar Cariri Sucré" loading="lazy" />
-            <figcaption class="scrap-frame__caption">
-              <span>Arte em Açúcar &amp; Gourmet</span>
-              <span>Cariri Sucré ♥</span>
-            </figcaption>
-          </figure>
-
-          <figure class="scrap-frame scrap-frame--tall">
-            <video src="assets/videos/florais.mp4" autoplay muted loop playsinline preload="metadata" poster="assets/photos/foto-08.jpg"></video>
-            <figcaption class="scrap-frame__caption">
-              <span>Flores Esculpidas à Mão</span>
-              <span>Ateliê</span>
-            </figcaption>
-          </figure>
-
-          <figure class="scrap-frame js-zoom-image" data-full-src="assets/photos/foto-21.jpg" data-title="Bolo em Acetato com Morangos Frescos">
-            <img src="assets/photos/foto-21.jpg" alt="Bolo em Acetato com morangos frescos" loading="lazy" />
-            <figcaption class="scrap-frame__caption">
-              <span>Bolo em Acetato</span>
-              <span>Morangos &amp; Ninho</span>
-            </figcaption>
-          </figure>
-
-          <figure class="scrap-frame js-zoom-image" data-full-src="assets/photos/foto-25.jpg" data-title="Personalizados 15 Anos com Carimbo Dourado">
-            <img src="assets/photos/foto-25.jpg" alt="Doces personalizados 15 anos" loading="lazy" />
-            <figcaption class="scrap-frame__caption">
-              <span>Personalizados 15 Anos</span>
-              <span>Carimbo Ouro</span>
-            </figcaption>
-          </figure>
-
-          <figure class="scrap-frame">
-            <video src="assets/videos/gourmet.mp4" autoplay muted loop playsinline preload="metadata" poster="assets/photos/foto-05.jpg"></video>
-            <figcaption class="scrap-frame__caption">
-              <span>Brigadeiros Gourmet</span>
-              <span>Produção</span>
-            </figcaption>
-          </figure>
-
-          <figure class="scrap-frame js-zoom-image" data-full-src="assets/photos/foto-14.jpg" data-title="Bolo de Andar para Casamentos e Celebrações">
-            <img src="assets/photos/foto-14.jpg" alt="Bolo de casamento 2 andares Cariri Sucré" loading="lazy" />
-            <figcaption class="scrap-frame__caption">
-              <span>Bolos de Andar</span>
-              <span>Casamentos</span>
-            </figcaption>
-          </figure>
-
-          <figure class="scrap-frame js-zoom-image" data-full-src="assets/photos/foto-18.jpg" data-title="Bem-Casados com Papel e Fita de Cetim Dourada">
-            <img src="assets/photos/foto-18.jpg" alt="Bem-casados artesanais" loading="lazy" />
-            <figcaption class="scrap-frame__caption">
-              <span>Bem-Casados Artesanais</span>
-              <span>Papel &amp; Fita</span>
-            </figcaption>
-          </figure>
-
-          <figure class="scrap-frame">
-            <video src="assets/videos/batismo.mp4" autoplay muted loop playsinline preload="metadata" poster="assets/photos/foto-17.jpg"></video>
-            <figcaption class="scrap-frame__caption">
-              <span>Personalizados Batizado</span>
-              <span>Detalhes em Ouro</span>
-            </figcaption>
-          </figure>
-
-          <figure class="scrap-frame scrap-frame--wide js-zoom-image" data-full-src="assets/photos/foto-24.jpg" data-title="Coleção Arte em Açúcar Tiffany & Margaridas">
-            <img src="assets/photos/foto-24.jpg" alt="Flores em açúcar turquesa e margaridas" loading="lazy" />
-            <figcaption class="scrap-frame__caption">
-              <span>Margaridas &amp; Flores em Açúcar</span>
-              <span>Escolha o Sabor da Massa</span>
-            </figcaption>
-          </figure>
+          <a class="hero__wa" href="https://wa.me/5588999620935" target="_blank" rel="noopener">Tirar dúvida no WhatsApp</a>
         </div>
       </div>
-    </section>
-  </main>
-
-  <!-- 5. RODAPÉ LIMPO DA DOCERIA -->
-  <footer class="site-footer">
-    <div class="container">
-      <img src="assets/logo-cariri-sucre.png" alt="Cariri Sucré" style="width:68px;height:68px;margin:0 auto 10px;" />
-      <p style="font-family:var(--font-display);font-size:1.25rem;font-weight:700;color:#fff;">
-        Cariri Sucré — Adoçando Sua Alma !
-      </p>
-      <p style="font-size:0.86rem;color:#E5C9C4;margin-top:4px;">
-        Juazeiro do Norte - CE • Encomendas: <a href="https://wa.me/5588999620935" target="_blank" rel="noopener noreferrer" style="color:#FF9EAA;font-weight:700;">(88) 99962-0935</a> • Instagram: <a href="https://www.instagram.com/caririsucre/" target="_blank" rel="noopener noreferrer" style="color:#fff;text-decoration:underline;">@caririsucre</a>
-      </p>
+      <div class="hero__collage" aria-hidden="true">
+        <figure class="hc hc--a">
+          <video src="assets/video/florais.mp4" poster="assets/video/florais.webp" muted loop playsinline autoplay preload="metadata"></video>
+        </figure>
+        <figure class="hc hc--b">
+          <img src="assets/img/p0706-77.webp" alt="" width="1200" height="1200" fetchpriority="high">
+        </figure>
+        <figure class="hc hc--c">
+          <video src="assets/video/gourmet.mp4" poster="assets/video/gourmet.webp" muted loop playsinline autoplay preload="metadata"></video>
+        </figure>
+        <img class="hc-seal" src="assets/logo.png" alt="" width="197" height="195">
+      </div>
     </div>
-  </footer>
+  </section>
 
-  <!-- 6. BARRA FLUTUANTE DO PEDIDO -->
-  <div class="floating-order-bar" role="region" aria-label="Resumo da encomenda">
-    <div class="container floating-order-bar__inner">
-      <div class="floating-order-bar__summary">
-        <span class="floating-order-bar__count" id="float-bar-count">0 itens</span>
-        <span class="floating-order-bar__total" id="float-bar-total">R$ 0,00</span>
-        <span class="floating-order-bar__rule-hint" id="float-bar-hint"></span>
+  <section class="tray" id="cardapio" aria-labelledby="cardapio-title">
+    <div class="wrap">
+      <div class="head-row">
+        <h2 id="cardapio-title">Cardápio de doces e bolos</h2>
+        <p>Toque numa forminha para ver sabores e preços. Você pode misturar as linhas de docinhos no mesmo pedido.</p>
       </div>
+      <ul class="tray__grid" data-tray role="list"></ul>
+    </div>
+  </section>
 
-      <button type="button" class="btn-hero-order js-open-drawer" style="padding:10px 22px;font-size:0.9rem;">
-        <span>Escolher Data &amp; Finalizar Pedido →</span>
-      </button>
+  <section class="cakes" id="bolos" aria-labelledby="bolos-title">
+    <div class="wrap">
+      <div class="head-row">
+        <h2 id="bolos-title">Bolos para a mesa principal</h2>
+        <p>Decoração simples inclusa. Papelaria, brilhos e enfeites são calculados à parte.</p>
+      </div>
+      <div class="cakes__pair">
+        <a class="cake-card" href="#c/bolos" data-open-cat="bolos" data-line="acetato">
+          <span class="cake-card__img m-zoom"><img src="assets/img/p0706-73.webp" alt="Bolo em acetato com morangos frescos e laço rosé" width="1200" height="1200" loading="lazy"></span>
+          <span class="cake-card__body">
+            <span class="cake-card__name">Bolo em Acetato</span>
+            <span class="cake-card__meta">12 a 35 fatias · 10 sabores</span>
+            <span class="cake-card__price">de R$ 90 a R$ 180</span>
+          </span>
+        </a>
+        <a class="cake-card" href="#c/bolos" data-open-cat="bolos" data-line="decorado">
+          <span class="cake-card__img m-zoom"><img src="assets/img/p0706-63.webp" alt="Bolo de casamento de dois andares, branco, com flores mosquitinho" width="1200" height="1200" loading="lazy"></span>
+          <span class="cake-card__body">
+            <span class="cake-card__name">Bolo Decorado</span>
+            <span class="cake-card__meta">12 a 70 fatias · 9 sabores</span>
+            <span class="cake-card__price">de R$ 120 a R$ 430</span>
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="atelier" id="atelie" aria-labelledby="atelie-title">
+    <div class="wrap">
+      <div class="head-row">
+        <h2 id="atelie-title">O ateliê em fotos e vídeos</h2>
+        <p>Cada flor de açúcar é modelada uma a uma. Veja o que saiu da nossa cozinha.
+          <a class="m-link" href="https://instagram.com/caririsucre" target="_blank" rel="noopener">Mais no Instagram</a></p>
+      </div>
+      <div class="wall">
+        <figure class="wall__lead" data-moment="picture-develops">
+          <img src="assets/img/p0706-68.webp" alt="Bandeja com docinhos de girassol, flores rosas e brigadeiros coloridos" width="1200" height="1200" loading="lazy">
+        </figure>
+        <figure class="wall__v"><video data-wall src="assets/video/batismo.mp4" poster="assets/video/batismo.webp" muted loop playsinline preload="none" aria-label="Docinhos personalizados de batizado com anjinhos"></video></figure>
+        <figure class="wall__p"><img src="assets/img/p0706-44-sm.webp" alt="Rosas brancas de açúcar" width="480" height="480" loading="lazy"></figure>
+        <figure class="wall__p"><img src="assets/img/p0706-55-sm.webp" alt="Docinhos com aviões azuis" width="480" height="480" loading="lazy"></figure>
+        <figure class="wall__v"><video data-wall src="assets/video/flores-lilas.mp4" poster="assets/video/flores-lilas.webp" muted loop playsinline preload="none" aria-label="Flores lilás de açúcar na forminha"></video></figure>
+        <figure class="wall__p"><img src="assets/img/p0706-54-sm.webp" alt="Flores de lótus brancas" width="480" height="480" loading="lazy"></figure>
+        <figure class="wall__p"><img src="assets/img/p0706-75-sm.webp" alt="Caixinha com dois brigadeiros gourmet" width="480" height="480" loading="lazy"></figure>
+      </div>
+      <button class="wall__pause" type="button" data-wall-toggle aria-pressed="false">Pausar vídeos</button>
+    </div>
+  </section>
+
+  <section class="how" id="como-pedir" aria-labelledby="como-title">
+    <div class="wrap how__in">
+      <div class="how__copy">
+        <h2 id="como-title">Como funciona a encomenda</h2>
+        <dl class="how__facts">
+          <div><dt>Pedido mínimo</dt><dd>50 docinhos, 25 de cada sabor. Flores de açúcar a partir de 25 da mesma flor.</dd></div>
+          <div><dt>Antecedência</dt><dd>48 horas. Para casamentos e 15 anos, fale com a gente o quanto antes.</dd></div>
+          <div><dt>Retirada ou entrega</dt><dd>Em Juazeiro do Norte. O horário é confirmado pelo WhatsApp depois do pedido.</dd></div>
+        </dl>
+        <div class="how__contact">
+          <a class="btn btn--red" href="https://wa.me/5588999620935" target="_blank" rel="noopener">Chamar no WhatsApp</a>
+          <a class="m-link" href="https://instagram.com/caririsucre" target="_blank" rel="noopener">@caririsucre</a>
+        </div>
+      </div>
+      <figure class="how__photo m-zoom"><img src="assets/img/p0706-59.webp" alt="Caixas de acetato com brigadeiros gourmet prontas para entrega" width="1200" height="1200" loading="lazy"></figure>
+    </div>
+  </section>
+
+  <section class="close" aria-labelledby="close-title">
+    <div class="wrap">
+      <div class="close__in">
+        <div>
+          <h2 id="close-title">Sua festa merece um doce bonito.</h2>
+          <a class="btn btn--milk btn--lg" href="#cardapio">Montar meu pedido</a>
+        </div>
+        <figure class="close__photo m-zoom"><img src="assets/img/p0706-76.webp" alt="Bandeja de docinhos com flores azuis de açúcar" width="1200" height="1200" loading="lazy"></figure>
+      </div>
+      <p class="close__name" aria-hidden="true">Cariri Sucré</p>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer__in">
+    <p>Cariri Sucré · Adoçando Sua Alma! · Juazeiro do Norte, CE</p>
+    <p><a href="https://wa.me/5588999620935" target="_blank" rel="noopener">WhatsApp (88) 99962-0935</a> · <a href="https://instagram.com/caririsucre" target="_blank" rel="noopener">Instagram</a></p>
+  </div>
+</footer>
+
+<!-- Folha do cardápio -->
+<dialog class="sheet" id="menu-sheet" aria-labelledby="sheet-title">
+  <div class="sheet__top">
+    <div class="sheet__bar">
+      <h2 id="sheet-title" data-sheet-title>Cardápio</h2>
+      <button class="icon-btn" type="button" data-close aria-label="Fechar cardápio"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    </div>
+    <nav class="chips" data-chips aria-label="Categorias"></nav>
+  </div>
+  <div class="sheet__body" data-sheet-body></div>
+  <div class="sheet__foot" data-sheet-foot></div>
+</dialog>
+
+<!-- Sacola -->
+<dialog class="sheet sheet--bag" id="bag-sheet" aria-labelledby="bag-title">
+  <div class="sheet__top">
+    <div class="sheet__bar">
+      <h2 id="bag-title">Sua sacola</h2>
+      <button class="icon-btn" type="button" data-close aria-label="Fechar sacola"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
     </div>
   </div>
+  <div class="sheet__body" data-bag-body></div>
+</dialog>
 
-  <!-- 7. GAVETA LATERAL DE FINALIZAÇÃO E AGENDAMENTO -->
-  <div class="drawer-backdrop" id="drawer-backdrop"></div>
-  <aside class="checkout-drawer" id="checkout-drawer" aria-label="Finalizar pedido">
-    <div class="checkout-drawer__header">
-      <div>
-        <h2 class="checkout-drawer__title">Seu Pedido Cariri Sucré</h2>
-        <div style="font-size:0.78rem;color:#FFE6EA;">
-          Confira seus sabores e escolha a data da encomenda
-        </div>
-      </div>
-      <button type="button" class="btn-close-drawer js-close-drawer" aria-label="Fechar">✕</button>
-    </div>
-
-    <form id="checkout-order-form" class="checkout-drawer__body" novalidate>
-      <div class="drawer-alert drawer-alert--warn" id="drawer-rule-alert">
-        Escolha pelo menos 50 doces (2 sabores de 25 unidades) para finalizar.
-      </div>
-
-      <div>
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-          <strong style="font-size:0.82rem;text-transform:uppercase;color:var(--brand-crimson);">Sabores Selecionados</strong>
-          <button type="button" class="js-close-drawer" style="font-size:0.78rem;color:var(--brand-red);font-weight:700;text-decoration:underline;">
-            + Escolher mais itens
-          </button>
-        </div>
-        <div class="cart-items-list" id="drawer-cart-list"></div>
-      </div>
-
-      <!-- Entrega ou Retirada -->
-      <div class="form-block">
-        <div class="form-block__title">Como deseja receber?</div>
-        <div class="mode-toggle-grid">
-          <button type="button" class="mode-option mode-option--active js-delivery-mode" id="mode-btn-retirada" data-mode="retirada">
-            <span class="mode-option__title">Retirada na Loja</span>
-            <span class="mode-option__sub">Juazeiro do Norte - CE</span>
-          </button>
-          <button type="button" class="mode-option js-delivery-mode" id="mode-btn-entrega" data-mode="entrega">
-            <span class="mode-option__title">Entrega (Delivery)</span>
-            <span class="mode-option__sub">Informe seu endereço</span>
-          </button>
-        </div>
-
-        <div id="delivery-address-fields" style="display:none;flex-direction:column;gap:10px;margin-top:4px;">
-          <div class="field-group">
-            <label for="customer-bairro">Bairro *</label>
-            <input type="text" id="customer-bairro" class="field-input" placeholder="Ex.: Lagoa Seca, Triângulo, Centro..." maxlength="80" />
-          </div>
-          <div class="field-group">
-            <label for="customer-address">Endereço e Número *</label>
-            <input type="text" id="customer-address" class="field-input" placeholder="Rua, número e ponto de referência" maxlength="160" />
-          </div>
-        </div>
-      </div>
-
-      <!-- Data do Pedido (mínimo 48h) -->
-      <div class="form-block">
-        <div class="form-block__title">Para qual dia é a sua encomenda?</div>
-        <p style="font-size:0.78rem;color:var(--ink-secondary);">
-          Produzimos sob encomenda com <strong>48h de antecedência</strong>. O horário exato será combinado com você no WhatsApp logo após o envio.
-        </p>
-
-        <div class="field-group">
-          <label for="order-date">Data *</label>
-          <input type="date" id="order-date" class="field-input mono" required />
-          <div class="quick-dates" id="quick-dates-root"></div>
-        </div>
-
-        <div class="field-group">
-          <label for="order-shift">Período de preferência</label>
-          <select id="order-shift" class="field-input">
-            <option value="Manhã (horário combinado no WhatsApp)">Manhã</option>
-            <option value="Tarde (horário combinado no WhatsApp)" selected>Tarde</option>
-            <option value="Noite (horário combinado no WhatsApp)">Início da Noite</option>
-          </select>
-        </div>
-      </div>
-
-      <!-- Identificação -->
-      <div class="form-block">
-        <div class="form-block__title">Seus Dados</div>
-        <div class="field-group">
-          <label for="customer-name">Seu Nome *</label>
-          <input type="text" id="customer-name" class="field-input" placeholder="Digite seu nome" required maxlength="100" />
-        </div>
-        <div class="field-group">
-          <label for="customer-phone">Seu WhatsApp</label>
-          <input type="tel" id="customer-phone" class="field-input mono" placeholder="(88) 99999-0000" maxlength="30" />
-        </div>
-        <div class="field-group">
-          <label for="customer-notes">Observações (cor das forminhas, fita ou detalhes)</label>
-          <textarea id="customer-notes" class="field-input" rows="2" placeholder="Opcional" maxlength="300"></textarea>
-        </div>
-      </div>
-
-      <div id="checkout-form-error" class="drawer-alert drawer-alert--warn" style="display:none;"></div>
-    </form>
-
-    <div class="checkout-drawer__footer">
-      <div class="checkout-totals">
-        <span class="checkout-totals__label">Total do Pedido:</span>
-        <span class="checkout-totals__val" id="drawer-total-val">R$ 0,00</span>
-      </div>
-      <button type="submit" form="checkout-order-form" id="btn-submit-whatsapp" class="btn-whatsapp-submit">
-        <span>Enviar Meu Pedido no WhatsApp</span>
-        <span aria-hidden="true">↗</span>
-      </button>
-    </div>
-  </aside>
-
-  <!-- 8. LIGHTBOX -->
-  <div class="lightbox" id="lightbox-modal" role="dialog" aria-modal="true" aria-label="Imagem ampliada">
-    <button type="button" class="lightbox__close js-close-lightbox" aria-label="Fechar">✕</button>
-    <img src="" alt="" class="lightbox__img" id="lightbox-img" />
+<div class="bagbar" data-bagbar hidden>
+  <div class="bagbar__in">
+    <p class="bagbar__sum" data-bagbar-sum></p>
+    <button class="btn btn--red" type="button" data-open-bag>Ver sacola</button>
   </div>
+</div>
 
-  <script src="app.js"></script>
+<div class="toast" data-toast role="status" aria-live="polite"></div>
+
+<script type="module" src="assets/app.js"></script>
+<script type="module" src="assets/moments/moments.js"></script>
 </body>
 </html>

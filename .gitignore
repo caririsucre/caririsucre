@@ -1,6 +1,6 @@
-contact_sheet.jpg
-cropped_items_sheet.jpg
-prepare_assets.py
-crop_menu_items.py
-build_collage_art.py
-audit_screenshot*.png
+.taste-skill/
+.impeccable/review/
+.impeccable/mocks/
+.impeccable/questions/
+node_modules/
+.DS_Store
