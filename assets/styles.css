@@ -95,7 +95,7 @@ a:hover .m-zoom img, .m-zoom:hover img { transform: scale(1.03); }
 .hero__wa { color: var(--red-ink); font-weight: 600; text-decoration: none; padding: 12px 0; background: linear-gradient(currentColor, currentColor) 0 80% / 100% 1.5px no-repeat; transition: background-size .35s var(--ease); }
 .hero__wa:hover { background-size: 0 1.5px; background-position: 100% 80%; }
 
-.hero__collage { position: relative; display: grid; grid-template-columns: repeat(6, 1fr); grid-template-rows: repeat(6, 1fr); gap: 14px; aspect-ratio: 1 / .92; }
+.hero__collage { position: relative; display: grid; grid-template-columns: repeat(12, 1fr); grid-template-rows: repeat(10, 1fr); gap: 12px; aspect-ratio: 1 / 1; }
 .hc { margin: 0; overflow: hidden; border-radius: var(--r-lg); background: var(--red-deep); box-shadow: var(--shadow); }
 .hc img, .hc video { width: 100%; height: 100%; object-fit: cover; }
 html.mo-js .hc img { animation: drift 16s ease-in-out 1.2s infinite alternate; transform-origin: 50% 50%; }
@@ -103,9 +103,12 @@ html.mo-js .hc--b img { animation-duration: 19s; transform-origin: 30% 70%; }
 html.mo-js .hc--c img { animation-duration: 14s; transform-origin: 70% 40%; }
 @keyframes drift { from { transform: scale(1); } to { transform: scale(1.07); } }
 @media (prefers-reduced-motion: reduce) { html.mo-js .hc img { animation: none; } }
-.hc--a { grid-column: 1 / 5; grid-row: 1 / 5; }
-.hc--b { grid-column: 5 / 7; grid-row: 2 / 5; }
-.hc--c { grid-column: 2 / 6; grid-row: 5 / 7; }
+.hc--a { grid-column: 1 / 8; grid-row: 1 / 7; }
+.hc--b { grid-column: 8 / 13; grid-row: 1 / 5; }
+.hc--c { grid-column: 8 / 13; grid-row: 5 / 8; }
+.hc--d { grid-column: 1 / 5; grid-row: 7 / 11; }
+.hc--e { grid-column: 5 / 8; grid-row: 7 / 11; }
+.hc--f { grid-column: 8 / 13; grid-row: 8 / 11; }
 .hc-seal { position: absolute; width: 22%; height: auto; left: -4%; bottom: 4%; filter: drop-shadow(0 10px 18px rgb(60 0 0 / .45)); }
 
 /* hero entrance: one authored moment */
@@ -115,7 +118,10 @@ html.mo-js .hero .hero__copy > :nth-child(2) { animation-delay: .08s; }
 html.mo-js .hero .hero__copy > :nth-child(3) { animation-delay: .16s; }
 html.mo-js .hero .hc--a { animation-name: settle; animation-delay: .1s; }
 html.mo-js .hero .hc--b { animation-name: settle; animation-delay: .22s; }
-html.mo-js .hero .hc--c { animation-name: settle; animation-delay: .34s; }
+html.mo-js .hero .hc--c { animation-name: settle; animation-delay: .3s; }
+html.mo-js .hero .hc--d { animation-name: settle; animation-delay: .38s; }
+html.mo-js .hero .hc--e { animation-name: settle; animation-delay: .46s; }
+html.mo-js .hero .hc--f { animation-name: settle; animation-delay: .54s; }
 html.mo-js .hero .hc-seal { animation: stamp .8s var(--ease) .6s both; }
 @keyframes rise { from { opacity: 0; transform: translateY(18px); } }
 @keyframes settle { from { opacity: 0; transform: translateY(22px) scale(.97); filter: blur(6px); } }
@@ -128,7 +134,7 @@ html.mo-js .hero .hc-seal { animation: stamp .8s var(--ease) .6s both; }
   .hero__lede { margin-top: 16px; }
   .hero__actions { margin-top: 24px; }
   .hero__actions .btn { width: 100%; }
-  .hero__collage { gap: 10px; aspect-ratio: 1 / .78; }
+  .hero__collage { gap: 8px; aspect-ratio: 1 / 1; }
   .hc { border-radius: var(--r-md); }
 }
 
@@ -172,6 +178,11 @@ html.mo-js .hero .hc-seal { animation: stamp .8s var(--ease) .6s both; }
 }
 
 /* ---------- cakes (pair) ---------- */
+.cakes__wall { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 24px; }
+.cakes__wall a { display: block; aspect-ratio: 1; border-radius: var(--r-md); background: #fff; transition: transform .3s var(--ease), box-shadow .3s var(--ease); }
+.cakes__wall a:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+.cakes__wall img { width: 100%; height: 100%; object-fit: cover; }
+@media (max-width: 760px) { .cakes__wall { grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 16px; } }
 .cakes__pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
 .cake-card { display: block; text-decoration: none; border-radius: var(--r-lg); background: var(--milk); border: 1px solid var(--line); overflow: hidden; transition: transform .3s var(--ease), box-shadow .3s var(--ease); }
 .cake-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
@@ -222,8 +233,10 @@ html.mo-js .hero .hc-seal { animation: stamp .8s var(--ease) .6s both; }
 .close { background: var(--red); color: var(--red-ink); padding-block: clamp(72px, 10vw, 128px) 0; overflow: hidden; }
 .close h2 { font-size: clamp(34px, 4.6vw, 64px); line-height: 1.04; max-width: 14em; }
 .close__in { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: clamp(32px, 5vw, 72px); align-items: center; }
-.close__photo { margin: 0; aspect-ratio: 4 / 3; border-radius: var(--r-lg); box-shadow: var(--shadow); }
-.close__photo img { width: 100%; height: 100%; object-fit: cover; }
+.close__wall { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.close__wall figure { margin: 0; aspect-ratio: 1; border-radius: var(--r-md); box-shadow: var(--shadow); }
+.close__wall img { width: 100%; height: 100%; object-fit: cover; }
+@media (max-width: 860px) { .close__wall { gap: 8px; } }
 @media (max-width: 860px) { .close__in { grid-template-columns: 1fr; } }
 .close .btn { margin-top: 28px; }
 .close__name { margin: clamp(40px, 6vw, 72px) 0 -0.12em; font: 400 clamp(64px, 15.5vw, 230px)/.9 var(--font-display); letter-spacing: -0.035em; white-space: nowrap; color: var(--red-deep); user-select: none; }
@@ -405,3 +418,7 @@ html.mo-js .gate__card > :nth-child(4) { animation-delay: .18s; }
 .pickup-note { padding: 12px 14px; border-radius: var(--r-sm); background: var(--sugar); font-size: 15px; color: var(--ink); }
 .bag-sum { padding: 10px 0 0; }
 .bag-line { display: flex; justify-content: space-between; gap: 12px; padding: 6px 0; color: var(--muted); font-size: 16px; font-variant-numeric: tabular-nums; }
+
+.footer__credit a { opacity: .85; }
+.footer__credit a:hover { opacity: 1; }
+.footer__credit b { font-weight: 700; color: #fff; }

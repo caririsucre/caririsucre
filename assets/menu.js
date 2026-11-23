@@ -185,14 +185,12 @@ export const CATEGORIES = [
       {
         id: "decorado",
         name: "Bolo Decorado",
-        img: "assets/img/p0706-63-sm.webp",
+        img: "assets/bolos/d-casal.webp",
         sizes: [
           { id: "d12", label: "12 a 15 fatias", flavors: 1, price: 120 },
           { id: "d20", label: "20 a 24 fatias", flavors: 2, price: 170 },
           { id: "d30", label: "30 a 35 fatias", flavors: 2, price: 210 },
           { id: "d50", label: "50 a 55 fatias", flavors: 2, price: 330 },
-          { id: "d1a40", label: "Primeiro andar, 40 a 50 fatias", flavors: 2, price: 370 },
-          { id: "d1a60", label: "Primeiro andar, 60 a 70 fatias", flavors: 2, price: 430 },
         ],
         flavors: ["Ninho", "Chocolate", "Chocolate Amargo", "Brigadeiro Branco", "Beijinho", "Café", "Churros", "Maracujá", "Coco Queimado"],
       },
