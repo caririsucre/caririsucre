@@ -1,4 +1,4 @@
-import { CATEGORIES, WHATSAPP, DELIVERY } from './menu.js?v=202611231701';
+import { CATEGORIES, WHATSAPP, DELIVERY } from './menu.js?v=202611231705';
 
 const FEES = new Map(DELIVERY.flatMap(g => g.areas));
 const feeLabel = v => v === null ? 'taxa a combinar' : v === 0 ? 'entrega grátis' : brlFee(v);
@@ -25,6 +25,28 @@ const ICON = {
 
 /* ---------------- Meta Pixel (ID 9850103268427591, mantido do site anterior) ---------------- */
 function track(ev, params) { try { if (typeof window.fbq === 'function') window.fbq('track', ev, params || {}); } catch {} }
+function trackCustom(ev, params) { try { if (typeof window.fbq === 'function') window.fbq('trackCustom', ev, params || {}); } catch {} }
+
+/* Pixel em todos os botões e links: evento "Clique" com o nome do botão e a seção */
+const SECTION_NAMES = { topo: 'Menu', 'hero-title': 'Topo', cardapio: 'Cardápio', bolos: 'Bolos', atelie: 'Ateliê', 'como-pedir': 'Como pedir', 'menu-sheet': 'Folha do cardápio', 'bag-sheet': 'Sacola' };
+function sectionOf(el) {
+  if (el.closest('[data-gate]')) return 'Entrada';
+  if (el.closest('.footer')) return 'Rodapé';
+  if (el.closest('.close')) return 'Fechamento';
+  if (el.closest('.bagbar')) return 'Barra da sacola';
+  if (el.closest('.hero')) return 'Topo';
+  const s = el.closest('[id]'); return (s && SECTION_NAMES[s.id]) || (s && s.id) || 'Página';
+}
+document.addEventListener('click', e => {
+  const el = e.target.closest('a, button, label.size, .seg label');
+  if (!el) return;
+  let label = (el.getAttribute('aria-label') || el.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 80);
+  const itemId = el.dataset.inc || el.dataset.dec;
+  if (itemId && ITEM[itemId]) label = `${label} · ${ITEM[itemId].name}`;
+  const href = el.getAttribute('href') || '';
+  trackCustom('Clique', { botao: label, secao: sectionOf(el), destino: href.split('?')[0] || undefined });
+  if (/wa\.me/.test(href)) track('Contact', { content_name: label, content_category: sectionOf(el) });
+}, true);
 
 /* ---------------- state ---------------- */
 const KEY = 'cariri-sacola-v1';
@@ -174,6 +196,7 @@ function syncCakeForm(form) {
 
 function openCat(id, line) {
   if (!BY_ID[id]) return;
+  if (current !== id || !sheet.open) track('ViewContent', { content_name: BY_ID[id].title, content_category: 'Categoria', content_ids: [id], content_type: 'product_group' });
   current = id; focusLine = line || null;
   renderSheet();
   if (bagSheet.open) bagSheet.close();
@@ -352,6 +375,7 @@ function sendOrder(f) {
   const url = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(lines.join('\n'))}`;
   const w = window.open(url, '_blank', 'noopener');
   if (!w) location.href = url;
+  trackCustom('PedidoEnviadoWhatsApp', { value: +t.sum.toFixed(2), currency: 'BRL', modo: d.modo, bairro: d.modo === 'Entrega' ? d.bairro : undefined });
 }
 
 function fmtDate(iso) {
@@ -506,11 +530,9 @@ function closeGate(then) {
 }
 if (document.documentElement.classList.contains('show-gate')) setTimeout(() => $('[data-gate-order]')?.focus({ preventScroll: true }), 50);
 gate.addEventListener('click', e => {
-  if (e.target.closest('[data-gate-order]')) { closeGate(() => $('#cardapio').scrollIntoView({ behavior: reduced ? 'auto' : 'smooth' })); }
-  else if (e.target.closest('[data-gate-talk]')) { track('Contact', { content_name: 'Falar com atendente (entrada)' }); closeGate(); }
-  else if (e.target.closest('[data-gate-close]')) closeGate();
+  if (e.target.closest('[data-gate-order]')) { trackCustom('EntradaMontarPedido'); closeGate(() => $('#cardapio').scrollIntoView({ behavior: reduced ? 'auto' : 'smooth' })); }
+  else if (e.target.closest('[data-gate-talk]')) closeGate();
 });
-addEventListener('keydown', e => { if (e.key === 'Escape' && document.documentElement.classList.contains('show-gate')) closeGate(); });
 
 addEventListener('hashchange', route);
 refresh();
