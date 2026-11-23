@@ -1357,8 +1357,14 @@ button:disabled {
   background-color: var(--bg-cocoa);
   color: var(--ink-on-dark);
   border-top: 2px solid var(--brand-red);
-  padding: 12px 0;
+  padding: 10px 0;
   box-shadow: 0 -8px 30px rgba(15, 8, 7, 0.35);
+  transform: translateY(105%);
+  transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.floating-order-bar--visible {
+  transform: translateY(0);
 }
 
 .floating-order-bar__inner {

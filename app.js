@@ -623,6 +623,7 @@
   function renderFloatingAndDrawer(summary) {
     // Header Badge & Floating Bar
     const headerBadge = document.getElementById('header-cart-badge');
+    const floatBar = document.querySelector('.floating-order-bar');
     const floatCount = document.getElementById('float-bar-count');
     const floatTotal = document.getElementById('float-bar-total');
     const floatHint = document.getElementById('float-bar-hint');
@@ -630,6 +631,10 @@
     const drawerList = document.getElementById('drawer-cart-list');
     const drawerTotal = document.getElementById('drawer-total-val');
     const submitBtn = document.getElementById('btn-submit-whatsapp');
+
+    if (floatBar) {
+      floatBar.classList.toggle('floating-order-bar--visible', summary.totalUnitsAll > 0);
+    }
 
     if (headerBadge) {
       headerBadge.textContent = summary.totalUnitsAll + ' un · ' + formatBRL(summary.totalValue);
