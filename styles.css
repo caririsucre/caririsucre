@@ -1324,21 +1324,28 @@ button:disabled {
 
   /* Compact Sticky Header on Mobile */
   .site-header__inner {
-    height: 60px;
-    gap: 10px;
+    height: 58px;
+    gap: 8px;
+  }
+
+  .brand-lockup {
+    gap: 8px;
+    min-width: 0;
   }
 
   .brand-lockup__logo {
-    width: 44px;
-    height: 44px;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
   }
 
   .brand-lockup__name {
-    font-size: 1.18rem;
+    font-size: 1.08rem;
+    white-space: nowrap;
   }
 
   .brand-lockup__tag {
-    font-size: 0.67rem;
+    display: none;
   }
 
   .main-nav {
@@ -1346,14 +1353,17 @@ button:disabled {
   }
 
   .btn-cart-header {
-    padding: 7px 12px;
-    font-size: 0.78rem;
+    padding: 6px 10px;
+    font-size: 0.76rem;
     gap: 6px;
+    white-space: nowrap;
+    flex-shrink: 0;
   }
 
   .btn-cart-header__badge {
-    font-size: 0.72rem;
-    padding: 2px 8px;
+    font-size: 0.71rem;
+    padding: 2px 7px;
+    white-space: nowrap;
   }
 
   /* Mobile-First Hero with Collage Art Above the Fold */
@@ -1412,16 +1422,17 @@ button:disabled {
     height: 24px;
   }
 
-  /* Compact Sticky Box Bar on Mobile */
+  /* Non-overlapping Box Bar on Mobile (Bottom dock handles sticky progress) */
   .section-menu {
     padding: 16px 0 40px;
   }
 
   .box-builder-bar {
-    top: 64px;
-    padding: 10px 12px;
+    position: relative;
+    top: auto;
+    padding: 12px 14px;
     border-radius: var(--radius-md);
-    gap: 8px;
+    gap: 10px;
     margin-bottom: 14px;
   }
 
