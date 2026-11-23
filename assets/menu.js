@@ -199,3 +199,19 @@ export const CATEGORIES = [
     ],
   },
 ];
+
+// Taxas de entrega (informadas pela loja). null = taxa a combinar pelo WhatsApp.
+export const DELIVERY = [
+  { group: "Juazeiro do Norte", areas: [
+    ["Aeroporto", 10], ["Antônio Vieira", 15], ["Betolândia", 10], ["Cajuína São Geraldo", 15],
+    ["Campo Alegre", 12], ["Carité", null], ["Centro", 12], ["Cidade Universitária", 15],
+    ["Fátima", null], ["Franciscanos", 15], ["Frei Damião", 15], ["Jardim Gonzaga", 15],
+    ["João Cabral", 12], ["José Geraldo da Cruz", 10], ["Juvêncio Santana", 10], ["Lagoa Seca", 15],
+    ["Leandro Bezerra de Menezes", 0], ["Limoeiro", 10], ["Monsenhor Francisco Murilo de Sá Barreto", 12],
+    ["Novo Juazeiro", 10], ["Pedrinhas", 12], ["Pio XII", 12], ["Pirajá", 12], ["Planalto", 15],
+    ["Prefeito Carlos Alberto da Cruz", 12], ["Professora Maria Geli Sá Barreto", 12], ["Romeirão", 12],
+    ["Salesianos", 15], ["Salgadinho", 15], ["Santa Tereza", 12], ["Santo Antônio", 15], ["São José", 16],
+    ["São Miguel", 10], ["Socorro", 12], ["Timbaúba", 12], ["Tiradentes", 12], ["Três Marias", 15], ["Triângulo", 15],
+  ]},
+  { group: "Outras cidades", areas: [["Barbalha", 25], ["Mata dos Limas", 20]] },
+];

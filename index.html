@@ -20,6 +20,7 @@
 <link rel="apple-touch-icon" href="assets/icon-192.png">
 <link rel="preload" href="assets/fonts/gloock-400-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/figtree-latin.woff2" as="font" type="font/woff2" crossorigin>
+<script>try{if(!sessionStorage.getItem('cs-gate')&&!/^#(c\/|sacola)/.test(location.hash))document.documentElement.classList.add('show-gate')}catch(e){}</script>
 <script>document.documentElement.classList.add('mo-js');setTimeout(()=>document.documentElement.classList.add('mo-safe'),2500)</script>
 <link rel="modulepreload" href="assets/moments/moments.js"><link rel="modulepreload" href="assets/moments/lib.js">
 <link rel="stylesheet" href="assets/styles.css">
@@ -32,6 +33,26 @@ fbq('init','9850103268427591');fbq('track','PageView');
 </head>
 <body>
 <a class="skip" href="#cardapio">Pular para o cardápio</a>
+
+<div class="gate" data-gate role="dialog" aria-modal="true" aria-labelledby="gate-title">
+  <div class="gate__photos" aria-hidden="true">
+    <img src="assets/img/hero-rosas.webp" alt="" width="1400" height="1400">
+    <img src="assets/img/p0706-77-sm.webp" alt="" width="640" height="640">
+    <img src="assets/img/p0706-14-sm.webp" alt="" width="640" height="640">
+  </div>
+  <div class="gate__card">
+    <img class="gate__logo" src="assets/logo.png" alt="" width="197" height="195">
+    <h2 id="gate-title" class="gate__title">Bem-vindo à Cariri Sucré</h2>
+    <p class="gate__lede">Doces finos e bolos por encomenda em Juazeiro do Norte. Como podemos ajudar?</p>
+    <div class="gate__actions">
+      <button class="btn btn--milk btn--lg" type="button" data-gate-order>Montar meu pedido
+        <svg class="arrow" viewBox="0 0 12 12" aria-hidden="true"><path d="M1 6h8"/><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg></button>
+      <a class="btn btn--line btn--lg" href="https://wa.me/5588999620935?text=Ol%C3%A1%2C%20Cariri%20Sucr%C3%A9!%20Quero%20falar%20com%20uma%20atendente." target="_blank" rel="noopener" data-gate-talk>
+        <svg class="wa" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Z"/></svg>Falar com atendente</a>
+    </div>
+    <button class="gate__skip" type="button" data-gate-close>Só quero ver o site</button>
+  </div>
+</div>
 
 <header class="nav" id="topo">
   <div class="wrap nav__in">
@@ -62,7 +83,7 @@ fbq('init','9850103268427591');fbq('track','PageView');
           <a class="btn btn--milk btn--lg" href="#cardapio">Montar meu pedido
             <svg class="arrow" viewBox="0 0 12 12" aria-hidden="true"><path d="M1 6h8"/><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
           </a>
-          <a class="hero__wa" href="https://wa.me/5588999620935" target="_blank" rel="noopener">Tirar dúvida no WhatsApp</a>
+          <a class="hero__wa" href="https://wa.me/5588999620935" target="_blank" rel="noopener">Falar com atendente</a>
         </div>
       </div>
       <div class="hero__collage" aria-hidden="true">

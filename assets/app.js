@@ -1,4 +1,8 @@
-import { CATEGORIES, WHATSAPP } from './menu.js';
+import { CATEGORIES, WHATSAPP, DELIVERY } from './menu.js';
+
+const FEES = new Map(DELIVERY.flatMap(g => g.areas));
+const feeLabel = v => v === null ? 'taxa a combinar' : v === 0 ? 'entrega grátis' : brlFee(v);
+function brlFee(v) { return v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }); }
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -231,7 +235,7 @@ function renderBag() {
     });
     html += `</ul>`;
   }
-  html += `<p class="bag-total"><span>Total estimado</span><span>${brl(t.sum)}</span></p>`;
+  html += `<div class="bag-sum" data-bag-sum></div>`;
   const probs = problems();
   html += probs.length ? probs.map(p => `<p class="notice">${esc(p)}</p>`).join('') : '';
   html += `<form class="bag-form" data-bag-form novalidate>
@@ -243,10 +247,13 @@ function renderBag() {
         <label><input type="radio" name="modo" value="Retirada" checked>Retirar na loja</label>
         <label><input type="radio" name="modo" value="Entrega">Entrega</label>
       </div></div>
-    <div class="grid2" data-entrega hidden>
-      <div class="field"><label for="f-bairro">Bairro</label><input id="f-bairro" name="bairro" autocomplete="address-level3"><p class="err" id="e-bairro"></p></div>
-      <div class="field"><label for="f-end">Rua e número</label><input id="f-end" name="endereco" autocomplete="street-address"><p class="err" id="e-end"></p></div>
+    <div class="entrega" data-entrega hidden>
+      <div class="field"><label for="f-bairro">Bairro ou cidade</label>
+        <select id="f-bairro" name="bairro"><option value="">Escolha o bairro</option>${DELIVERY.map(g => `<optgroup label="${esc(g.group)}">${g.areas.map(([n, v]) => `<option value="${esc(n)}">${esc(n)} · ${feeLabel(v)}</option>`).join('')}</optgroup>`).join('')}</select>
+        <p class="err" id="e-bairro"></p></div>
+      <div class="field"><label for="f-end">Rua, número e ponto de referência</label><input id="f-end" name="endereco" autocomplete="street-address"><p class="err" id="e-end"></p></div>
     </div>
+    <p class="pickup-note" data-retirada>Você retira na loja, em Juazeiro do Norte. O horário é confirmado pelo WhatsApp.</p>
     <div class="grid2">
       <div class="field"><label for="f-data">Data da festa</label><input id="f-data" name="data" type="date" min="${minDate()}" required><p class="err" id="e-data"></p></div>
       <div class="field"><label for="f-per">Período</label><select id="f-per" name="periodo"><option>Manhã</option><option>Tarde</option><option>Início da noite</option></select></div>
@@ -273,9 +280,26 @@ function persistForm(f) {
   const d = Object.fromEntries(new FormData(f));
   try { localStorage.setItem(FORM_KEY, JSON.stringify(d)); } catch {}
 }
+function deliveryFee(f) {
+  if (!f || f.elements.modo.value !== 'Entrega') return { on: false, fee: 0, known: true };
+  const b = f.elements.bairro.value;
+  if (!b) return { on: true, fee: 0, known: false, none: true };
+  const v = FEES.get(b);
+  return { on: true, fee: v ?? 0, known: v !== null && v !== undefined, area: b };
+}
+function updateSum(f) {
+  const box = $('[data-bag-sum]'); if (!box) return;
+  const t = totals(); const d = deliveryFee(f);
+  let html = `<p class="bag-line"><span>Doces e bolos</span><span>${brl(t.sum)}</span></p>`;
+  if (d.on) html += `<p class="bag-line"><span>Entrega${d.area ? ` (${esc(d.area)})` : ''}</span><span>${d.none ? 'escolha o bairro' : d.known ? (d.fee ? brl(d.fee) : 'grátis') : 'a combinar'}</span></p>`;
+  html += `<p class="bag-total"><span>Total${d.on && !d.known ? ' sem entrega' : ''}</span><span>${brl(t.sum + (d.on ? d.fee : 0))}</span></p>`;
+  box.innerHTML = html;
+}
 function toggleEntrega(f) {
   const on = f.elements.modo.value === 'Entrega';
   $('[data-entrega]', f).hidden = !on;
+  $('[data-retirada]', f).hidden = on;
+  updateSum(f);
 }
 
 function fieldErr(f, name, errId, msg) {
@@ -292,7 +316,7 @@ function sendOrder(f) {
   const check = (name, id, msg) => { const good = fieldErr(f, name, id, msg); if (!good && !first) first = f.elements[name]; ok = ok && good; };
   check('nome', 'e-nome', d.nome.trim() ? '' : 'Diga seu nome para a gente te chamar.');
   if (d.modo === 'Entrega') {
-    check('bairro', 'e-bairro', d.bairro.trim() ? '' : 'Informe o bairro da entrega.');
+    check('bairro', 'e-bairro', d.bairro ? '' : 'Escolha o bairro da entrega.');
     check('endereco', 'e-end', d.endereco.trim() ? '' : 'Informe a rua e o número.');
   }
   check('data', 'e-data', !d.data ? 'Escolha a data da festa.' : d.data < minDate() ? 'Precisamos de 48 horas: escolha a partir de ' + fmtDate(minDate()) + '.' : '');
@@ -312,10 +336,12 @@ function sendOrder(f) {
     for (const c of state.cakes) lines.push(`• ${c.line}, ${c.size}, ${c.flavors.join(' e ')} (${brl(c.price)})`);
     lines.push('');
   }
-  lines.push(`*Total estimado: ${brl(totals().sum)}*`, '');
+  const dl = deliveryFee(f);
+  if (dl.on) lines.push(`Entrega (${dl.area}): ${dl.known ? (dl.fee ? brl(dl.fee) : 'grátis') : 'taxa a combinar'}`);
+  lines.push(`*Total: ${brl(totals().sum + (dl.on ? dl.fee : 0))}${dl.on && !dl.known ? ' + entrega' : ''}*`, '');
   lines.push(`Nome: ${d.nome.trim()}`);
   if (d.tel && d.tel.trim()) lines.push(`WhatsApp: ${d.tel.trim()}`);
-  lines.push(d.modo === 'Entrega' ? `Entrega: ${d.endereco.trim()}, ${d.bairro.trim()}` : 'Retirada na loja');
+  lines.push(d.modo === 'Entrega' ? `Endereço: ${d.endereco.trim()}, ${d.bairro}` : 'Retirada na loja');
   lines.push(`Data: ${fmtDate(d.data)}, ${d.periodo.toLowerCase()}`);
   if (d.obs.trim()) lines.push(`Observações: ${d.obs.trim()}`);
   const t = totals();
@@ -430,7 +456,7 @@ document.addEventListener('change', e => {
   const f = e.target.closest('[data-cake-form]');
   if (f) syncCakeForm(f);
   const b = e.target.closest('[data-bag-form]');
-  if (b) { if (e.target.name === 'modo') toggleEntrega(b); persistForm(b); }
+  if (b) { if (e.target.name === 'modo') toggleEntrega(b); else updateSum(b); persistForm(b); }
 });
 
 document.addEventListener('submit', e => {
@@ -468,6 +494,23 @@ function syncWall() {
 const io = new IntersectionObserver(es => { for (const e of es) vis.set(e.target, e.isIntersecting); syncWall(); }, { rootMargin: '120px' });
 for (const v of $$('video')) { if (reduced) v.removeAttribute('autoplay'); io.observe(v); }
 if (reduced) { const b = $('[data-wall-toggle]'); b.setAttribute('aria-pressed', 'true'); b.textContent = 'Tocar vídeos'; }
+
+/* welcome gate */
+const gate = $('[data-gate]');
+function closeGate(then) {
+  try { sessionStorage.setItem('cs-gate', '1'); } catch {}
+  const html = document.documentElement;
+  if (!html.classList.contains('show-gate')) { then && then(); return; }
+  const done = () => { html.classList.remove('show-gate'); gate.classList.remove('is-leaving'); then && then(); };
+  if (reduced) done(); else { gate.classList.add('is-leaving'); setTimeout(done, 420); }
+}
+if (document.documentElement.classList.contains('show-gate')) setTimeout(() => $('[data-gate-order]')?.focus({ preventScroll: true }), 50);
+gate.addEventListener('click', e => {
+  if (e.target.closest('[data-gate-order]')) { closeGate(() => $('#cardapio').scrollIntoView({ behavior: reduced ? 'auto' : 'smooth' })); }
+  else if (e.target.closest('[data-gate-talk]')) { track('Contact', { content_name: 'Falar com atendente (entrada)' }); closeGate(); }
+  else if (e.target.closest('[data-gate-close]')) closeGate();
+});
+addEventListener('keydown', e => { if (e.key === 'Escape' && document.documentElement.classList.contains('show-gate')) closeGate(); });
 
 addEventListener('hashchange', route);
 refresh();
