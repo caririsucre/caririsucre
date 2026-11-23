@@ -164,13 +164,13 @@
   ];
 
   const CATEGORY_GROUPS = [
-    { key: 'favoritos', title: 'Os Favoritos de Sempre (Tradicionais)', badge: 'R$ 1,40/unid • Lotes de 25 • Mínimo 50 Doces (2 Sabores)', note: 'Combine 25 doces desta categoria com +25 de qualquer outra linha (ex.: Gourmet ou Exclusiva) ou escolha 50 todos tradicionais.' },
-    { key: 'especiais', title: 'Especiais da Casa (Linha Gourmet)', badge: 'R$ 1,60 a R$ 1,80/unid • Lotes de 25 • Mínimo 50 Doces', note: 'Chocolate nobre, Nutella pura, castanhas e finalizações especiais. Pode misturar 25 Gourmet + 25 Tradicional!' },
-    { key: 'exclusiva', title: 'Nossa Linha Exclusiva (Autorais)', badge: 'R$ 2,50 a R$ 3,00/unid • Lotes de 25 • Mínimo 50 Doces', note: 'Sabores autorais de alta confeitaria: Pistache, Damasco Recheado, Quebra-Queixo, Limão Siciliano e Especiarias.' },
-    { key: 'arte', title: 'Arte em Açúcar (Flores Modeladas à Mão)', badge: 'R$ 3,00 a R$ 4,00/unid • Mínimo 25 Doces (1 Sabor)', note: 'Após a escolha da flor, selecione abaixo o sabor da massa do doce (pode ser qualquer sabor presente no cardápio!).' },
-    { key: 'personalizada', title: 'Linha Personalizada (Batizado, 15 Anos, Casamento)', badge: 'R$ 1,80/unid • Pedido Mínimo 50 Doces (Lotes de 25)', note: 'Doces carimbados em dourado e modelados nas cores do seu evento. Informe o tema/nome e o sabor da massa.' },
-    { key: 'comemoracao', title: 'Os Preferidos da Comemoração (Bem-Casados, Trufas & Copinhos)', badge: 'Bem-Casado: Mín. 20 unid • Trufas e Copinhos: Mín. 25 unid', note: 'Bem-casados já incluem papel e fita na cor do seu evento.' },
-    { key: 'bolos', title: 'Bolos em Acetato & Portfólio de Bolos Festivos', badge: 'De 12 a 70 Fatias • R$ 90 a R$ 430', note: 'Decoração simples inclusa; papelaria, topo, brilhos e enfeites especiais são calculados à parte no WhatsApp.' }
+    { key: 'favoritos', title: 'Os Favoritos de Sempre', badge: 'R$ 1,40 / unid • Lotes de 25', note: 'Os clássicos mais amados. Combine 25 doces desta linha com qualquer outra categoria.', banner: 'assets/art/strip-tradicionais.jpg' },
+    { key: 'especiais', title: 'Especiais da Casa • Gourmet', badge: 'R$ 1,60 a R$ 1,80 / unid • Lotes de 25', note: 'Chocolate nobre, Nutella pura, castanhas e finalizações especiais.', banner: 'assets/art/strip-gourmet.jpg' },
+    { key: 'exclusiva', title: 'Nossa Linha Exclusiva', badge: 'R$ 2,50 a R$ 3,00 / unid • Lotes de 25', note: 'Sabores autorais: Pistache, Damasco Recheado, Quebra-Queixo, Limão Siciliano e Especiarias.', banner: 'assets/art/strip-exclusiva.jpg' },
+    { key: 'arte', title: 'Arte em Açúcar • Flores Modeladas à Mão', badge: 'R$ 3,00 a R$ 4,00 / unid • Mín. 25 doces', note: 'Escolha a flor e selecione abaixo qualquer sabor do cardápio para a massa do doce.', banner: 'assets/art/strip-flores.jpg' },
+    { key: 'personalizada', title: 'Linha Personalizada', badge: 'R$ 1,80 / unid • Mínimo 50 doces', note: 'Doces modelados e carimbados em dourado para 15 anos, batizado, casamento e aniversário.', banner: 'assets/art/strip-personalizados.jpg' },
+    { key: 'comemoracao', title: 'Os Preferidos da Comemoração', badge: 'Bem-Casados (20 un) • Trufas & Copinhos (25 un)', note: 'Bem-casados artesanais com papel e fita, trufas banhadas e copinhos sobremesa.', banner: 'assets/art/strip-comemoracao.jpg' },
+    { key: 'bolos', title: 'Bolos em Acetato & Portfólio de Bolos', badge: '12 a 70 Fatias • R$ 90 a R$ 430', note: 'Escolha o tamanho e os sabores do recheio (decoração simples inclusa).', banner: 'assets/art/strip-bolos.jpg' }
   ];
 
   // Estado da Caixa de Encomenda
@@ -400,21 +400,18 @@
   // Combos prontos de 1 clique (respeitando 25+25=50 ou 100 doces)
   function applyPresetCombo(comboType) {
     if (comboType === 'misto50') {
-      // 25 Tradicional + 25 Gourmet = 50 doces
       addBatchToCart('fav-brigadeiro');
       addBatchToCart('esp-ninho-nutella');
     } else if (comboType === 'tradicional50') {
-      // 25 Brigadeiro + 25 Beijinho = 50 todos tradicionais
       addBatchToCart('fav-brigadeiro');
       addBatchToCart('fav-beijinho');
     } else if (comboType === 'festa100') {
-      // 100 doces (4 sabores de 25)
       addBatchToCart('fav-brigadeiro');
       addBatchToCart('esp-ninho-nutella');
       addBatchToCart('esp-ferrero-rocher');
       addBatchToCart('exc-quebra-queixo');
     }
-    const menuEl = document.getElementById('atelie-encomendas');
+    const menuEl = document.getElementById('cardapio');
     if (menuEl) {
       menuEl.scrollIntoView({ behavior: 'smooth' });
     }
@@ -433,19 +430,18 @@
     const numLotes25 = Math.floor(summary.totalDoces50Pool / 25);
 
     if (summary.isValidOrder) {
-      chipEl.textContent = '✓ Pedido Mínimo Atingido (' + summary.totalUnitsAll + ' unid)';
-      chipEl.className = 'box-tracker__status-chip box-tracker__status-chip--ready';
+      chipEl.textContent = '✓ Caixa pronta (' + summary.totalUnitsAll + ' unid)';
+      chipEl.className = 'box-status-pill box-status-pill--ready';
     } else if (summary.totalDoces50Pool === 25) {
-      chipEl.textContent = '1 de 2 Lotes (25 / 50 Doces)';
-      chipEl.className = 'box-tracker__status-chip';
+      chipEl.textContent = '25 de 50 doces • Falta +1 sabor (25 un)';
+      chipEl.className = 'box-status-pill';
     } else {
-      chipEl.textContent = 'Mínimo: 50 Doces (2 Lotes de 25)';
-      chipEl.className = 'box-tracker__status-chip';
+      chipEl.textContent = 'Mínimo: 50 doces (2 sabores de 25)';
+      chipEl.className = 'box-status-pill';
     }
 
     msgEl.textContent = summary.validationMessage;
 
-    // Renderizar slots visuais de 25 doces
     let slotsHtml = '';
     const slotsToShow = Math.max(2, numLotes25 + 1);
     let slotIndex = 0;
@@ -455,17 +451,17 @@
         const batches = Math.floor(entry.qty / 25);
         for (let b = 0; b < batches; b++) {
           slotIndex++;
-          slotsHtml += '<span class="slot-chip slot-chip--filled">Lote ' + slotIndex + ': 25x ' + escapeHtml(entry.item.name) + '</span>';
+          slotsHtml += '<span class="slot-pill slot-pill--filled">✓ 25x ' + escapeHtml(entry.item.name) + '</span>';
         }
       } else {
-        slotsHtml += '<span class="slot-chip slot-chip--filled">' + entry.qty + 'x ' + escapeHtml(entry.item.name) + '</span>';
+        slotsHtml += '<span class="slot-pill slot-pill--filled">✓ ' + entry.qty + 'x ' + escapeHtml(entry.item.name) + '</span>';
       }
     });
 
     while (slotIndex < slotsToShow && slotIndex < 4) {
       slotIndex++;
-      const label = slotIndex <= 2 ? 'Lote ' + slotIndex + ' (25 unid • Obrigatório p/ 50)' : 'Lote Extra ' + slotIndex + ' (+25 unid)';
-      slotsHtml += '<span class="slot-chip">' + label + '</span>';
+      const label = slotIndex <= 2 ? slotIndex + 'º Sabor (25 doces)' : '+ Sabor Extra (25 doces)';
+      slotsHtml += '<span class="slot-pill">' + label + '</span>';
     }
 
     slotsEl.innerHTML = slotsHtml;
@@ -505,12 +501,12 @@
       if (items.length === 0) return;
 
       html += '<section class="menu-group" data-group="' + group.key + '">';
-      html += '  <div class="menu-group__header">';
-      html += '    <div class="menu-group__title-wrap">';
+      html += '  <div class="menu-group__banner" style="background-image:url(\'' + escapeHtml(group.banner) + '\')">';
+      html += '    <div>';
       html += '      <h3 class="menu-group__title">' + escapeHtml(group.title) + '</h3>';
-      html += '      <span class="menu-group__rule-badge">' + escapeHtml(group.badge) + '</span>';
+      html += '      <p class="menu-group__note">' + escapeHtml(group.note) + '</p>';
       html += '    </div>';
-      html += '    <p class="menu-group__note">' + escapeHtml(group.note) + '</p>';
+      html += '    <span class="menu-group__rule-pill">' + escapeHtml(group.badge) + '</span>';
       html += '  </div>';
       html += '  <div class="product-grid">';
 
@@ -961,7 +957,7 @@
         return;
       }
 
-      const catTab = e.target.closest('.js-cat-tab');
+      const catTab = e.target.closest('.js-cat-tab, .js-cat-jump');
       if (catTab) {
         const cat = catTab.getAttribute('data-cat');
         state.activeCategory = cat;
