@@ -204,8 +204,8 @@ export const CATEGORIES = [
 export const DELIVERY = [
   { group: "Juazeiro do Norte", areas: [
     ["Aeroporto", 10], ["Antônio Vieira", 15], ["Betolândia", 10], ["Cajuína São Geraldo", 15],
-    ["Campo Alegre", 12], ["Carité", null], ["Centro", 12], ["Cidade Universitária", 15],
-    ["Fátima", null], ["Franciscanos", 15], ["Frei Damião", 15], ["Jardim Gonzaga", 15],
+    ["Campo Alegre", 12], ["Centro", 12], ["Cidade Universitária", 15],
+    ["Fátima", 10], ["Franciscanos", 15], ["Frei Damião", 15], ["Jardim Gonzaga", 15],
     ["João Cabral", 12], ["José Geraldo da Cruz", 10], ["Juvêncio Santana", 10], ["Lagoa Seca", 15],
     ["Leandro Bezerra de Menezes", 0], ["Limoeiro", 10], ["Monsenhor Francisco Murilo de Sá Barreto", 12],
     ["Novo Juazeiro", 10], ["Pedrinhas", 12], ["Pio XII", 12], ["Pirajá", 12], ["Planalto", 15],
