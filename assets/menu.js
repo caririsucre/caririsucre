@@ -185,7 +185,7 @@ export const CATEGORIES = [
       {
         id: "decorado",
         name: "Bolo Decorado",
-        img: "assets/bolos/d-casal.webp",
+        img: "assets/img/bolo-viva.webp",
         sizes: [
           { id: "d12", label: "12 a 15 fatias", flavors: 1, price: 120 },
           { id: "d20", label: "20 a 24 fatias", flavors: 2, price: 170 },

@@ -1,4 +1,4 @@
-import { CATEGORIES, WHATSAPP, DELIVERY } from './menu.js?v=202611231705';
+import { CATEGORIES, WHATSAPP, DELIVERY } from './menu.js?v=202611231710';
 
 const FEES = new Map(DELIVERY.flatMap(g => g.areas));
 const feeLabel = v => v === null ? 'taxa a combinar' : v === 0 ? 'entrega grátis' : brlFee(v);
