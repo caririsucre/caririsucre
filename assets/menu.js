@@ -164,14 +164,14 @@ export const CATEGORIES = [
     ],
   },
   {
-    id: "bolos",
-    title: "Bolos",
-    short: "Bolos",
+    id: "bolo-acetato",
+    title: "Bolo em Acetato",
+    short: "Bolo em Acetato",
     tile: "assets/img/p0706-73-sm.webp",
     from: 90,
     group: "bolos",
     cake: true,
-    rule: "Decoração simples inclusa. Papelaria, brilhos e enfeites são calculados à parte.",
+    rule: "De 12 a 35 fatias, 10 sabores. Decoração simples inclusa. Papelaria, brilhos e enfeites são calculados à parte.",
     lines: [
       {
         id: "acetato",
@@ -184,9 +184,21 @@ export const CATEGORIES = [
         ],
         flavors: ["Ninho", "Chocolate", "Chocolate Amargo", "Brigadeiro Branco", "Beijinho", "Café", "Churros", "Maracujá", "Coco Queimado", "Abacaxi com Coco"],
       },
+    ],
+  },
+  {
+    id: "bolo-chantininho",
+    title: "Bolo de Chantininho",
+    short: "Bolo de Chantininho",
+    tile: "assets/img/bolo-viva.webp",
+    from: 120,
+    group: "bolos",
+    cake: true,
+    rule: "De 12 a 55 fatias, 9 sabores. Decoração simples inclusa. Papelaria, brilhos e enfeites são calculados à parte.",
+    lines: [
       {
         id: "decorado",
-        name: "Bolo Decorado",
+        name: "Bolo de Chantininho",
         img: "assets/img/bolo-viva.webp",
         sizes: [
           { id: "d12", label: "12 a 15 fatias", flavors: 1, price: 120 },

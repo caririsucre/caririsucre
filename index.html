@@ -23,7 +23,7 @@
 <script>try{if(!sessionStorage.getItem('cs-gate')&&!/^#(c\/|sacola)/.test(location.hash))document.documentElement.classList.add('show-gate')}catch(e){}</script>
 <script>document.documentElement.classList.add('mo-js');setTimeout(()=>document.documentElement.classList.add('mo-safe'),2500)</script>
 <link rel="modulepreload" href="assets/moments/moments.js"><link rel="modulepreload" href="assets/moments/lib.js">
-<link rel="stylesheet" href="assets/styles.css?v=202611240843">
+<link rel="stylesheet" href="assets/styles.css?v=202611240848">
 <!-- Meta Pixel (mantido do site anterior) -->
 <script>
 !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
@@ -60,7 +60,6 @@ fbq('init','9850103268427591');fbq('track','PageView');
     </a>
     <nav class="nav__links" aria-label="Seções">
       <a href="#cardapio">Cardápio</a>
-      <a href="#bolos">Bolos</a>
       <a href="#atelie">Ateliê</a>
       <a href="#como-pedir">Como pedir</a>
     </nav>
@@ -100,36 +99,9 @@ fbq('init','9850103268427591');fbq('track','PageView');
     <div class="wrap">
       <div class="head-row">
         <h2 id="cardapio-title">Cardápio de doces e bolos</h2>
-        <p>Toque numa forminha para ver sabores e preços. Você pode misturar as linhas de docinhos no mesmo pedido.</p>
+        <p>Toque numa categoria para ver sabores e preços. Você pode misturar as linhas de docinhos no mesmo pedido.</p>
       </div>
       <ul class="tray__grid" data-tray role="list"></ul>
-    </div>
-  </section>
-
-  <section class="cakes" id="bolos" aria-labelledby="bolos-title">
-    <div class="wrap">
-      <div class="head-row">
-        <h2 id="bolos-title">Bolos para a mesa principal</h2>
-        <p>Decoração simples inclusa. Papelaria, brilhos e enfeites são calculados à parte.</p>
-      </div>
-      <div class="cakes__pair">
-        <a class="cake-card" href="#c/bolos" data-open-cat="bolos" data-line="acetato">
-          <span class="cake-card__img m-zoom"><img src="assets/img/p0706-73.webp" alt="Bolo em acetato com morangos frescos e laço rosé" width="1200" height="1200" loading="lazy"></span>
-          <span class="cake-card__body">
-            <span class="cake-card__name">Bolo em Acetato</span>
-            <span class="cake-card__meta">12 a 35 fatias · 10 sabores</span>
-            <span class="cake-card__price">de R$ 90 a R$ 180</span>
-          </span>
-        </a>
-        <a class="cake-card" href="#c/bolos" data-open-cat="bolos" data-line="decorado">
-          <span class="cake-card__img m-zoom"><img src="assets/img/bolo-viva.webp" alt="Bolo decorado de aniversário com bico de confeiteiro e escrita Viva" width="576" height="620" loading="lazy" style="object-position: center 40%"></span>
-          <span class="cake-card__body">
-            <span class="cake-card__name">Bolo Decorado</span>
-            <span class="cake-card__meta">12 a 55 fatias · 9 sabores</span>
-            <span class="cake-card__price">de R$ 120 a R$ 330</span>
-          </span>
-        </a>
-      </div>
     </div>
   </section>
 
@@ -246,7 +218,7 @@ fbq('init','9850103268427591');fbq('track','PageView');
 
 <div class="toast" data-toast role="status" aria-live="polite"></div>
 
-<script type="module" src="assets/app.js?v=202611240843"></script>
+<script type="module" src="assets/app.js?v=202611240848"></script>
 <script type="module" src="assets/moments/moments.js"></script>
 </body>
 </html>

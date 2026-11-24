@@ -1,4 +1,4 @@
-import { CATEGORIES, WHATSAPP, DELIVERY } from './menu.js?v=202611240843';
+import { CATEGORIES, WHATSAPP, DELIVERY } from './menu.js?v=202611240848';
 
 const FEES = new Map(DELIVERY.flatMap(g => g.areas));
 const feeLabel = v => v === null ? 'taxa a combinar' : v === 0 ? 'entrega grátis' : brlFee(v);
@@ -14,6 +14,8 @@ const BY_ID = Object.fromEntries(CATEGORIES.map(c => [c.id, c]));
 const ITEM = {};
 for (const c of CATEGORIES) for (const it of c.items || []) ITEM[it.id] = { ...it, cat: c };
 const DOCINHOS_MIN = 50;
+const CAKE_LINES = CATEGORIES.flatMap(c => (c.lines || []).map(l => ({ ...l, cat: c })));
+const lineById = id => CAKE_LINES.find(l => l.id === id);
 
 const ICON = {
   arrow: '<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M1 6h8"/><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>',
@@ -68,7 +70,7 @@ function totals() {
   return { units, sum, docinhos, lines, cakes: state.cakes.length };
 }
 function catCount(cat) {
-  if (cat.cake) return state.cakes.length;
+  if (cat.cake) { const names = cat.lines.map(l => l.name); return state.cakes.filter(c => names.includes(c.line)).length; }
   return cat.items.reduce((n, it) => n + (state.qty[it.id] || 0), 0);
 }
 
@@ -83,11 +85,13 @@ function setQty(id, q) {
 function renderTray() {
   $('[data-tray]').innerHTML = CATEGORIES.map(c => {
     const n = catCount(c);
-    const from = c.cake ? `a partir de <b>${brl(c.from).replace(',00', '')}</b>` : `a partir de <b>${brl(c.from)}</b>`;
-    return `<li><button class="tile" type="button" data-open-cat="${c.id}" aria-label="${esc(c.title)}, ${c.cake ? 'a partir de ' + brl(c.from) : 'a partir de ' + brl(c.from) + ' a unidade'}${n ? `, ${n} na sacola` : ''}">
-      <span class="seal"><img src="${c.tile}" alt="" width="480" height="480" loading="lazy"></span>
-      <span><span class="tile__name">${esc(c.short)}${n ? `<span class="tile__badge">${n}</span>` : ''}</span><span class="tile__from">${from}</span></span>
-      <span class="tile__go" aria-hidden="true">${ICON.arrow}</span>
+    const price = c.cake ? brl(c.from).replace(',00', '') : brl(c.from);
+    return `<li><button class="tile" type="button" data-open-cat="${c.id}" aria-label="${esc(c.title)}, a partir de ${brl(c.from)}${c.cake ? '' : ' a unidade'}${n ? `, ${n} na sacola` : ''}">
+      <span class="tile__photo"><img src="${c.tile}" alt="" width="640" height="640" loading="lazy">${n ? `<span class="tile__badge">${n}</span>` : ''}</span>
+      <span class="tile__body">
+        <span class="tile__name">${esc(c.short)}</span>
+        <span class="tile__row"><span class="tile__from">a partir de <b>${price}${c.cake ? '' : '<small> /un.</small>'}</b></span><span class="tile__go" aria-hidden="true">${ICON.arrow}</span></span>
+      </span>
     </button></li>`;
   }).join('');
 }
@@ -188,7 +192,7 @@ function summaryLine(t) {
 }
 
 function syncCakeForm(form) {
-  const line = BY_ID.bolos.lines.find(l => l.id === form.dataset.cakeForm);
+  const line = lineById(form.dataset.cakeForm);
   const sizeId = new FormData(form).get(`cake-${line.id}-size`);
   const size = line.sizes.find(s => s.id === sizeId);
   const f2 = $('[data-f2]', form);
@@ -434,7 +438,7 @@ function toast(msg) {
 /* ---------------- routing (back button closes the sheet) ---------------- */
 function route() {
   const h = decodeURIComponent(location.hash.slice(1));
-  if (h.startsWith('c/')) { const [, id, line] = h.split('/'); if (BY_ID[id]) { openCat(id, line); return; } }
+  if (h.startsWith('c/')) { let [, id, line] = h.split('/'); if (id === 'bolos') id = line === 'decorado' ? 'bolo-chantininho' : 'bolo-acetato'; if (BY_ID[id]) { openCat(id, line); return; } }
   if (h === 'sacola') { openBag(); return; }
   if (sheet.open || bagSheet.open) closeSheets();
 }
@@ -492,13 +496,13 @@ document.addEventListener('submit', e => {
   const f = e.target;
   if (f.matches('[data-cake-form]')) {
     e.preventDefault();
-    const line = BY_ID.bolos.lines.find(l => l.id === f.dataset.cakeForm);
+    const line = lineById(f.dataset.cakeForm);
     const fd = new FormData(f);
     const size = line.sizes.find(s => s.id === fd.get(`cake-${line.id}-size`));
     const flavors = [fd.get('f1'), size.flavors > 1 ? fd.get('f2') : ''].filter(Boolean);
     const uniq = [...new Set(flavors)];
     state.cakes.push({ line: line.name, size: size.label, flavors: uniq, price: size.price });
-    track('AddToCart', { content_name: `${line.name} ${size.label}`, content_category: 'Bolos', content_ids: [size.id], content_type: 'product', value: size.price, currency: 'BRL', num_items: 1 });
+    track('AddToCart', { content_name: `${line.name} ${size.label}`, content_category: line.cat.title, content_ids: [size.id], content_type: 'product', value: size.price, currency: 'BRL', num_items: 1 });
     save(); refresh();
     toast(`${line.name} na sacola`);
     return;
