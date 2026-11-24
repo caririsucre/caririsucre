@@ -1,4 +1,4 @@
-import { CATEGORIES, WHATSAPP, DELIVERY } from './menu.js?v=202611231710';
+import { CATEGORIES, WHATSAPP, DELIVERY } from './menu.js?v=202611240833';
 
 const FEES = new Map(DELIVERY.flatMap(g => g.areas));
 const feeLabel = v => v === null ? 'taxa a combinar' : v === 0 ? 'entrega grátis' : brlFee(v);
@@ -32,6 +32,8 @@ const SECTION_NAMES = { topo: 'Menu', 'hero-title': 'Topo', cardapio: 'Cardápio
 function sectionOf(el) {
   if (el.closest('[data-gate]')) return 'Entrada';
   if (el.closest('.footer')) return 'Rodapé';
+  if (el.closest('.jcode')) return 'Jcode Cariri';
+  if (el.closest('.fab')) return 'Botão flutuante';
   if (el.closest('.close')) return 'Fechamento';
   if (el.closest('.bagbar')) return 'Barra da sacola';
   if (el.closest('.hero')) return 'Topo';

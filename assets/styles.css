@@ -421,3 +421,38 @@ html.mo-js .gate__card > :nth-child(4) { animation-delay: .18s; }
 .footer__credit a { opacity: .85; }
 .footer__credit a:hover { opacity: 1; }
 .footer__credit b { font-weight: 700; color: #fff; }
+
+/* ---------- Jcode Cariri credit band ---------- */
+.jcode { background: var(--ink); color: #FBEFEA; padding-block: clamp(48px, 7vw, 88px); }
+.jcode__in { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); gap: 28px 48px; align-items: center; }
+.jcode__kicker { color: #E6B96A; font-weight: 700; font-size: 15px; letter-spacing: .02em; margin-bottom: 10px; }
+.jcode h2 { font-size: clamp(30px, 3.8vw, 50px); line-height: 1.05; }
+.jcode h2 a { color: #fff; text-decoration: underline; text-decoration-color: #E6B96A; text-decoration-thickness: 3px; text-underline-offset: 6px; transition: text-decoration-color .2s; }
+.jcode h2 a:hover { text-decoration-color: #fff; }
+.jcode__lede { margin-top: 14px; color: #D9C5BE; max-width: 36em; }
+.jcode__actions { display: grid; gap: 12px; justify-items: stretch; }
+.btn--jcode { background: #E6B96A; color: var(--ink); }
+.btn--jcode:hover { background: #F0C97F; }
+.jcode__wa { justify-self: center; color: #fff; font-weight: 600; text-decoration: none; padding: 12px 0; background: linear-gradient(currentColor, currentColor) 0 80% / 100% 1.5px no-repeat; }
+.jcode__wa:hover { background-size: 0 1.5px; }
+.jcode :focus-visible { outline-color: #fff; }
+@media (max-width: 760px) { .jcode__in { grid-template-columns: 1fr; } }
+
+/* ---------- floating WhatsApp button, always in view ---------- */
+.fab { position: fixed; right: max(16px, env(safe-area-inset-right)); bottom: calc(18px + env(safe-area-inset-bottom)); z-index: 40; display: inline-flex; align-items: center; gap: 10px; min-height: 58px; padding: 0 22px 0 8px; border-radius: 999px; background: #1FAF54; color: #fff; text-decoration: none; font-weight: 700; font-size: 16px; box-shadow: 0 12px 28px -10px rgb(0 60 20 / .55), 0 2px 6px rgb(0 0 0 / .15); transition: transform .3s var(--ease), bottom .4s var(--ease), background-color .2s; animation: fabFloat 3.2s ease-in-out infinite; }
+.fab:hover { background: #17994A; transform: translateY(-2px) scale(1.03); animation-play-state: paused; }
+.fab__icon { position: relative; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: rgb(255 255 255 / .16); }
+.fab__icon svg { width: 26px; height: 26px; fill: currentColor; }
+.fab__icon::before, .fab__icon::after { content: ""; position: absolute; inset: 0; border-radius: 50%; border: 2px solid rgb(255 255 255 / .7); animation: fabRing 2.4s ease-out infinite; }
+.fab__icon::after { animation-delay: 1.2s; }
+@keyframes fabFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+@keyframes fabRing { from { transform: scale(1); opacity: .9; } to { transform: scale(1.9); opacity: 0; } }
+body.has-bag .fab { bottom: calc(92px + env(safe-area-inset-bottom)); }
+html.show-gate .fab { display: none; }
+@media (max-width: 640px) {
+  .fab { padding: 0; min-height: 60px; width: 60px; justify-content: center; }
+  .fab__label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .fab__icon { width: 60px; height: 60px; background: transparent; }
+  .fab__icon svg { width: 32px; height: 32px; }
+}
+@media (prefers-reduced-motion: reduce) { .fab, .fab__icon::before, .fab__icon::after { animation: none; } .fab__icon::before, .fab__icon::after { display: none; } }
