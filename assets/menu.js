@@ -194,7 +194,10 @@ export const CATEGORIES = [
     from: 120,
     group: "bolos",
     cake: true,
-    rule: "De 12 a 55 fatias, 9 sabores. Decoração simples inclusa. Papelaria, brilhos e enfeites são calculados à parte.",
+    rule: "De 12 a 55 fatias, 9 sabores. O preço inclui a decoração simples em chantininho.",
+    notice: "Papelaria (topo de bolo, tags), velas, enfeites e brilhos não estão inclusos no preço. O valor desses adicionais é consultado no atendimento pelo WhatsApp.",
+    noticeTitle: "Adicionais à parte",
+    cakeNote: "Papelaria, velas e enfeites: valor consultado no atendimento",
     lines: [
       {
         id: "decorado",

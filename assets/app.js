@@ -1,4 +1,4 @@
-import { CATEGORIES, WHATSAPP, DELIVERY } from './menu.js?v=202611240907';
+import { CATEGORIES, WHATSAPP, DELIVERY } from './menu.js?v=202611241029';
 
 const FEES = new Map(DELIVERY.flatMap(g => g.areas));
 const feeLabel = v => v === null ? 'taxa a combinar' : v === 0 ? 'entrega grátis' : brlFee(v);
@@ -16,6 +16,7 @@ for (const c of CATEGORIES) for (const it of c.items || []) ITEM[it.id] = { ...i
 const DOCINHOS_MIN = 50;
 const CAKE_LINES = CATEGORIES.flatMap(c => (c.lines || []).map(l => ({ ...l, cat: c })));
 const lineById = id => CAKE_LINES.find(l => l.id === id);
+const cakeNote = c => (CAKE_LINES.find(l => l.name === c.line)?.cat.cakeNote) || '';
 
 const ICON = {
   arrow: '<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M1 6h8"/><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>',
@@ -154,7 +155,7 @@ function renderSheet() {
   const body = $('[data-sheet-body]');
   let html = `<div class="cat-intro"><p class="cat-rule">${ICON.info}<span>${esc(cat.rule)}</span></p>`;
   if (cat.gallery) html += `<div class="cat-strip">${cat.gallery.map(g => `<img src="${g}" alt="" width="480" height="480" loading="lazy">`).join('')}</div>`;
-  if (cat.notice) html += `<p class="cat-alert" role="note"><strong>Atenção ao valor</strong>${esc(cat.notice)}</p>`;
+  if (cat.notice) html += `<p class="cat-alert" role="note"><strong>${esc(cat.noticeTitle || 'Atenção ao valor')}</strong>${esc(cat.notice)}</p>`;
   html += `</div>`;
   if (cat.cake) {
     html += `<div class="cake-lines">${cat.lines.map(cakeLine).join('')}</div>`;
@@ -261,13 +262,15 @@ function renderBag() {
   if (state.cakes.length) {
     html += `<p class="bag-group">Bolos</p><ul class="bag-list" role="list">`;
     state.cakes.forEach((c, i) => {
-      html += `<li class="bag-row"><div><div class="bag-row__name">${esc(c.line)}, ${esc(c.size)}</div><div class="bag-row__sub">${esc(c.flavors.join(' e '))} · ${brl(c.price)}</div><button class="bag-row__rm" type="button" data-rm-cake="${i}">Remover</button></div></li>`;
+      const note = cakeNote(c);
+      html += `<li class="bag-row"><div><div class="bag-row__name">${esc(c.line)}, ${esc(c.size)}</div><div class="bag-row__sub">${esc(c.flavors.join(' e '))} · ${brl(c.price)}</div>${note ? `<div class="bag-row__note">${esc(note)}</div>` : ''}<button class="bag-row__rm" type="button" data-rm-cake="${i}">Remover</button></div></li>`;
     });
     html += `</ul>`;
   }
   html += `<div class="bag-sum" data-bag-sum></div>`;
   const probs = problems();
   html += probs.length ? probs.map(p => `<p class="notice">${esc(p)}</p>`).join('') : '';
+  if (state.cakes.some(c => cakeNote(c))) html += `<p class="cat-alert" role="note"><strong>Bolo de Chantininho</strong>Papelaria, velas, enfeites e brilhos não estão no total. O valor desses adicionais é consultado no atendimento pelo WhatsApp.</p>`;
   if (bagLines().some(g => g.cat.fromPrice)) html += `<p class="cat-alert" role="note"><strong>Personalizados</strong>O total é uma estimativa: os personalizados podem ter adicional conforme a arte e o tipo de carimbo. A loja confirma o valor final pelo WhatsApp.</p>`;
   html += `<form class="bag-form" data-bag-form novalidate>
     <h3>Seus dados para a encomenda</h3>
@@ -365,7 +368,10 @@ function sendOrder(f) {
   }
   if (state.cakes.length) {
     lines.push('*Bolos*');
-    for (const c of state.cakes) lines.push(`• ${c.line}, ${c.size}, ${c.flavors.join(' e ')} (${brl(c.price)})`);
+    for (const c of state.cakes) {
+      lines.push(`• ${c.line}, ${c.size}, ${c.flavors.join(' e ')} (${brl(c.price)})`);
+      if (cakeNote(c)) lines.push('  _Papelaria, velas e enfeites: quero consultar o valor no atendimento._');
+    }
     lines.push('');
   }
   const dl = deliveryFee(f);
