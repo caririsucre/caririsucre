@@ -1,4 +1,4 @@
-import { CATEGORIES, WHATSAPP, DELIVERY } from './menu.js?v=202611240848';
+import { CATEGORIES, WHATSAPP, DELIVERY } from './menu.js?v=202611240907';
 
 const FEES = new Map(DELIVERY.flatMap(g => g.areas));
 const feeLabel = v => v === null ? 'taxa a combinar' : v === 0 ? 'entrega grátis' : brlFee(v);
@@ -272,7 +272,6 @@ function renderBag() {
   html += `<form class="bag-form" data-bag-form novalidate>
     <h3>Seus dados para a encomenda</h3>
     <div class="field"><label for="f-nome">Seu nome</label><input id="f-nome" name="nome" autocomplete="name" required><p class="err" id="e-nome"></p></div>
-    <div class="field"><label for="f-tel">Seu WhatsApp <span style="font-weight:400;color:var(--muted)">(opcional)</span></label><input id="f-tel" name="tel" type="tel" inputmode="tel" autocomplete="tel"></div>
     <div class="field"><span class="lbl" id="lbl-modo">Como vai receber</span>
       <div class="seg" role="radiogroup" aria-labelledby="lbl-modo">
         <label><input type="radio" name="modo" value="Retirada" checked>Retirar na loja</label>
@@ -287,7 +286,7 @@ function renderBag() {
     <p class="pickup-note" data-retirada>Você retira na loja, em Juazeiro do Norte. O horário é confirmado pelo WhatsApp.</p>
     <div class="grid2">
       <div class="field"><label for="f-data">Data da festa</label><input id="f-data" name="data" type="date" min="${minDate()}" required><p class="err" id="e-data"></p></div>
-      <div class="field"><label for="f-per">Período</label><select id="f-per" name="periodo"><option>Manhã</option><option>Tarde</option><option>Início da noite</option></select></div>
+      <div class="field"><label for="f-per">Período</label><select id="f-per" name="periodo"><option>Manhã</option><option>Tarde</option></select></div>
     </div>
     <div class="field"><label for="f-obs">Observações</label><textarea id="f-obs" name="obs" placeholder="Cor das forminhas, nome no carimbo, sabor da massa das flores, tema da festa"></textarea></div>
     <button class="btn btn--red bag-send" type="submit">${ICON.wa}Enviar pedido pelo WhatsApp</button>
@@ -305,6 +304,7 @@ function restoreForm() {
     if (el instanceof RadioNodeList) { for (const r of el) r.checked = r.value === v; } else el.value = v;
   }
   if (f.elements.data.value && f.elements.data.value < minDate()) f.elements.data.value = '';
+  if (!['Manhã', 'Tarde'].includes(f.elements.periodo.value)) f.elements.periodo.value = 'Manhã';
   toggleEntrega(f);
 }
 function persistForm(f) {
@@ -372,7 +372,6 @@ function sendOrder(f) {
   if (dl.on) lines.push(`Entrega (${dl.area}): ${dl.known ? (dl.fee ? brl(dl.fee) : 'grátis') : 'taxa a combinar'}`);
   lines.push(`*Total: ${brl(totals().sum + (dl.on ? dl.fee : 0))}${dl.on && !dl.known ? ' + entrega' : ''}*`, '');
   lines.push(`Nome: ${d.nome.trim()}`);
-  if (d.tel && d.tel.trim()) lines.push(`WhatsApp: ${d.tel.trim()}`);
   lines.push(d.modo === 'Entrega' ? `Endereço: ${d.endereco.trim()}, ${d.bairro}` : 'Retirada na loja');
   lines.push(`Data: ${fmtDate(d.data)}, ${d.periodo.toLowerCase()}`);
   if (d.obs.trim()) lines.push(`Observações: ${d.obs.trim()}`);
@@ -527,6 +526,12 @@ function syncWall() {
 const io = new IntersectionObserver(es => { for (const e of es) vis.set(e.target, e.isIntersecting); syncWall(); }, { rootMargin: '120px' });
 for (const v of $$('video')) { if (reduced) v.removeAttribute('autoplay'); io.observe(v); }
 if (reduced) { const b = $('[data-wall-toggle]'); b.setAttribute('aria-pressed', 'true'); b.textContent = 'Tocar vídeos'; }
+
+/* data: abre o calendário ao tocar no campo */
+document.addEventListener('click', e => {
+  const el = e.target.closest('input[type="date"]');
+  if (el && typeof el.showPicker === 'function') { try { el.showPicker(); } catch {} }
+});
 
 /* welcome gate */
 const gate = $('[data-gate]');

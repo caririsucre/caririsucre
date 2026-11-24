@@ -459,3 +459,7 @@ html.show-gate .fab { display: none; }
 .cat-alert { display: grid; gap: 4px; padding: 14px 16px; border-radius: var(--r-md); background: #FFF4DC; border: 1.5px solid #E2B45A; color: #4A3210; font-size: 15px; line-height: 1.5; }
 .cat-alert strong { font-size: 15px; color: #7A4E00; }
 .item__note, .bag-row__note { margin-top: 2px; color: #7A4E00; font-size: 13.5px; font-weight: 600; }
+
+/* date field: whole field opens the picker */
+.field input[type="date"] { cursor: pointer; }
+.field input[type="date"]::-webkit-calendar-picker-indicator { cursor: pointer; }
