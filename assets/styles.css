@@ -279,7 +279,7 @@ body.has-bag .footer { padding-bottom: calc(100px + env(safe-area-inset-bottom))
 .cat-rule { display: flex; gap: 12px; align-items: flex-start; padding: 14px 16px; border-radius: var(--r-md); background: var(--sugar); color: var(--ink); font-size: 15px; line-height: 1.5; }
 .cat-rule svg { flex: none; width: 20px; height: 20px; margin-top: 1px; fill: none; stroke: var(--red); stroke-width: 1.8; }
 .cat-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-.cat-strip img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: var(--r-sm); }
+.cat-strip img { width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; border-radius: var(--r-sm); }
 
 .items { list-style: none; margin: 0; padding: 0; display: grid; }
 .item { display: grid; grid-template-columns: 64px 1fr auto; align-items: center; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--line); }
@@ -456,3 +456,8 @@ html.show-gate .fab { display: none; }
   .fab__icon svg { width: 32px; height: 32px; }
 }
 @media (prefers-reduced-motion: reduce) { .fab, .fab__icon::before, .fab__icon::after { animation: none; } .fab__icon::before, .fab__icon::after { display: none; } }
+
+/* price notice for personalizados */
+.cat-alert { display: grid; gap: 4px; padding: 14px 16px; border-radius: var(--r-md); background: #FFF4DC; border: 1.5px solid #E2B45A; color: #4A3210; font-size: 15px; line-height: 1.5; }
+.cat-alert strong { font-size: 15px; color: #7A4E00; }
+.item__note, .bag-row__note { margin-top: 2px; color: #7A4E00; font-size: 13.5px; font-weight: 600; }

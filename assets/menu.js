@@ -107,7 +107,9 @@ export const CATEGORIES = [
     group: "personalizados",
     min: 50, step: 25,
     rule: "Mínimo de 50. Nome, idade ou desenho em carimbo dourado: conte o tema nas observações.",
-    gallery: ["assets/img/p0706-78-sm.webp", "assets/img/p0706-69-sm.webp", "assets/img/p0706-80-sm.webp"],
+    gallery: ["assets/img/p0706-78-sm.webp", "assets/img/personalizado-batizado-sm.webp", "assets/img/p0706-80-sm.webp"],
+    notice: "O valor de R$ 1,80 é a partir de. Pode haver adicional por unidade, a depender da arte e do tipo de carimbo escolhidos. O valor final é confirmado pelo WhatsApp antes de fechar o pedido.",
+    fromPrice: true,
     items: [d("personalizado", "Docinho personalizado com carimbo", 1.8, null)],
   },
   {

@@ -1,4 +1,4 @@
-import { CATEGORIES, WHATSAPP, DELIVERY } from './menu.js?v=202611240833';
+import { CATEGORIES, WHATSAPP, DELIVERY } from './menu.js?v=202611240843';
 
 const FEES = new Map(DELIVERY.flatMap(g => g.areas));
 const feeLabel = v => v === null ? 'taxa a combinar' : v === 0 ? 'entrega grátis' : brlFee(v);
@@ -119,7 +119,7 @@ function itemRow(it) {
     : `<button class="add-btn" type="button" data-inc="${it.id}">Adicionar ${cat.min}</button>`;
   return `<li class="item${it.img ? '' : ' item--noimg'}${q ? ' is-in' : ''}">
     ${it.img ? `<span class="seal"><img src="${it.img}" alt="${esc(it.name)}" width="240" height="240" loading="lazy"></span>` : ''}
-    <div><div class="item__name">${esc(it.name)}</div><div class="item__price"><b>${brl(it.price)}</b> a unidade${q ? ` · ${brl(q * it.price)}` : ''}</div></div>
+    <div><div class="item__name">${esc(it.name)}</div><div class="item__price">${cat.fromPrice ? 'a partir de ' : ''}<b>${brl(it.price)}</b> a unidade${q ? ` · ${brl(q * it.price)}` : ''}</div>${cat.fromPrice ? '<div class="item__note">Pode ter adicional conforme a arte e o carimbo</div>' : ''}</div>
     ${ctrl}
   </li>`;
 }
@@ -150,6 +150,7 @@ function renderSheet() {
   const body = $('[data-sheet-body]');
   let html = `<div class="cat-intro"><p class="cat-rule">${ICON.info}<span>${esc(cat.rule)}</span></p>`;
   if (cat.gallery) html += `<div class="cat-strip">${cat.gallery.map(g => `<img src="${g}" alt="" width="480" height="480" loading="lazy">`).join('')}</div>`;
+  if (cat.notice) html += `<p class="cat-alert" role="note"><strong>Atenção ao valor</strong>${esc(cat.notice)}</p>`;
   html += `</div>`;
   if (cat.cake) {
     html += `<div class="cake-lines">${cat.lines.map(cakeLine).join('')}</div>`;
@@ -248,7 +249,7 @@ function renderBag() {
   for (const g of bagLines()) {
     html += `<p class="bag-group">${esc(g.cat.title)}</p><ul class="bag-list" role="list">`;
     for (const { it, q } of g.rows) {
-      html += `<li class="bag-row"><div><div class="bag-row__name">${q} × ${esc(it.name)}</div><div class="bag-row__sub">${brl(it.price)} cada · ${brl(q * it.price)}</div></div>
+      html += `<li class="bag-row"><div><div class="bag-row__name">${q} × ${esc(it.name)}</div><div class="bag-row__sub">${it.cat.fromPrice ? 'a partir de ' : ''}${brl(it.price)} cada · ${brl(q * it.price)}</div>${it.cat.fromPrice ? '<div class="bag-row__note">Pode ter adicional conforme a arte e o tipo de carimbo</div>' : ''}</div>
         <div class="stepper" role="group" aria-label="Quantidade de ${esc(it.name)}"><button type="button" data-dec="${it.id}" aria-label="Tirar ${it.cat.step}">${ICON.minus}</button><output>${q}</output><button type="button" data-inc="${it.id}" aria-label="Mais ${it.cat.step}">${ICON.plus}</button></div></li>`;
     }
     html += `</ul>`;
@@ -263,6 +264,7 @@ function renderBag() {
   html += `<div class="bag-sum" data-bag-sum></div>`;
   const probs = problems();
   html += probs.length ? probs.map(p => `<p class="notice">${esc(p)}</p>`).join('') : '';
+  if (bagLines().some(g => g.cat.fromPrice)) html += `<p class="cat-alert" role="note"><strong>Personalizados</strong>O total é uma estimativa: os personalizados podem ter adicional conforme a arte e o tipo de carimbo. A loja confirma o valor final pelo WhatsApp.</p>`;
   html += `<form class="bag-form" data-bag-form novalidate>
     <h3>Seus dados para a encomenda</h3>
     <div class="field"><label for="f-nome">Seu nome</label><input id="f-nome" name="nome" autocomplete="name" required><p class="err" id="e-nome"></p></div>
@@ -353,7 +355,8 @@ function sendOrder(f) {
   const lines = ['Olá, Cariri Sucré! Quero fazer uma encomenda pelo site:', ''];
   for (const g of bagLines()) {
     lines.push(`*${g.cat.title}*`);
-    for (const { it, q } of g.rows) lines.push(`• ${q} ${it.name} (${brl(q * it.price)})`);
+    for (const { it, q } of g.rows) lines.push(`• ${q} ${it.name} (${g.cat.fromPrice ? 'a partir de ' : ''}${brl(q * it.price)})`);
+    if (g.cat.fromPrice) lines.push('  _Valor a confirmar: pode ter adicional conforme a arte e o tipo de carimbo._');
     lines.push('');
   }
   if (state.cakes.length) {
